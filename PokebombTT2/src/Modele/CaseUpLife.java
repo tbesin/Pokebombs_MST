@@ -17,7 +17,12 @@ public class CaseUpLife extends Entity {
 	public void update(){
 	}
 	
-	public static Image getCaseUpLifeImg(){
+	public Image getCaseUpLifeImg(){
+		ImageIcon ic = new ImageIcon("baieVie1.png");
+		return ic.getImage();
+	}
+	
+	public Image getImg(){
 		ImageIcon ic = new ImageIcon("baieVie1.png");
 		return ic.getImage();
 	}

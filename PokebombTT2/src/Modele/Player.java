@@ -18,8 +18,8 @@ public class Player extends Entity {
 	
 	// ATTRIBUTS
 	int velX= 0 , velY = 0 ;
-	int speed = 2 ;
-	int bomb =10;
+	int speed = 4 ;
+	int bomb =1;
 	int life = 1;
 	int canGo ;// se dŽplacer
 	boolean playerGoBomb = false; //passer a travers les bombes
@@ -27,7 +27,7 @@ public class Player extends Entity {
 	boolean playerPoseBomb = false;// pouvoir traverser la bombe
 	int playerNumber = 1 ;		//permet de déterminer l'image du joueur
 	int n=0;// ˆ rŽflechir mode solo
-	boolean pousseBomb=false;
+	boolean pousseBomb=true;
 	boolean interrupteurUse = true;
 	boolean playerGoTrap = false;
 	String direction = "Sud" ;
@@ -198,8 +198,44 @@ public class Player extends Entity {
 				ic = new ImageIcon("Player2right1.png");
 			}
 		}
+		return ic.getImage();
+	}
+	
+	
+	
+	
+	
+	public Image getImg(){
+		ImageIcon ic = new ImageIcon("Player1down1.png");
+		if(this.playerNumber == 1){							//joueur 1
+			if(direction == "Nord"){
+				ic = new ImageIcon("Player1up1.png");
+			}
+			else if(direction == "Ouest"){
+				ic = new ImageIcon("Player1left1.png");
+			}
+			else if(direction == "Est"){
+				ic = new ImageIcon("Player1right1.png");
+			}
+			
+			if(this.speed > 2){					//pour le vélo (perte de précision avec la taille du getBounds()
+				if(direction == "Sud"){
+					ic = new ImageIcon("Player1velo_down1.png");
+				}
+				else if(direction == "Nord"){
+					ic = new ImageIcon("Player1velo_up1.png");
+				}
+				else if(direction == "Ouest"){
+					ic = new ImageIcon("Player1velo_left1.png");
+				}
+				else if(direction == "Est"){
+					ic = new ImageIcon("Player1velo_right1.png");
+				}
+			}
+		}
 		
-		if(this.playerNumber == 3){							//joueur 3
+		
+		if(this.playerNumber == 2){							//joueur 2
 			if(direction == "Sud"){
 				ic = new ImageIcon("Player2down1.png");
 			}
@@ -213,22 +249,6 @@ public class Player extends Entity {
 				ic = new ImageIcon("Player2right1.png");
 			}
 		}
-		
-		if(this.playerNumber == 4){							//joueur 4
-			if(direction == "Sud"){
-				ic = new ImageIcon("Player2down1.png");
-			}
-			else if(direction == "Nord"){
-				ic = new ImageIcon("Player2up1.png");
-			}
-			else if(direction == "Ouest"){
-				ic = new ImageIcon("Player2left1.png");
-			}
-			else if(direction == "Est"){
-				ic = new ImageIcon("Player2right1.png");
-			}
-		}
-		
 		return ic.getImage();
 	}
 	
@@ -273,7 +293,7 @@ public class Player extends Entity {
 	
 	
 	public void checkLimite(){
-		String mode = "multi";
+		String mode = "solo";
 		if(mode =="multi"){
 		if (life>0){
 		if (x>=560) x=560;
@@ -290,7 +310,7 @@ public class Player extends Entity {
 	
 
 	public void checkLife(){
-		//if(life==1 && n==0 ){x=0;y=0;n=1;}// mode solo
+		if(life==1 && n==0 ){x=0;y=0;n=1;}// mode solo
 		if (life<1){setActif(false); x=1000; y =10000;}
 	}
 	
@@ -343,7 +363,7 @@ public class Player extends Entity {
 		Random rand = new Random();
 		ArrayList<CaseTeleportation> caseTeleportation= GameController.getCaseTeleportationList() ;
 		ArrayList a = new ArrayList();
-		if (ct.getTeleportationIn()){
+		if (ct.getTeleportationIn()&&caseTeleportation.size()>1){
 			int i =0;
 			while (i < caseTeleportation.size()){
 			if (caseTeleportation.get(i).getTeleportationIn()==false){

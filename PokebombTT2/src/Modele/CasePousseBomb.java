@@ -17,7 +17,12 @@ public class CasePousseBomb extends Entity {
 	public void update(){
 	}
 	
-	public static Image getCasePousseBombImg(){
+	public Image getCasePousseBombImg(){
+		ImageIcon ic = new ImageIcon("casePoussebomb.png");
+		return ic.getImage();
+	}
+	
+	public Image getImg(){
 		ImageIcon ic = new ImageIcon("casePoussebomb.png");
 		return ic.getImage();
 	}

@@ -22,6 +22,12 @@ public class TrapInterruptor extends Entity{
 	ImageIcon ic = new ImageIcon("pokedex.png");
 	return ic.getImage();
  }
+	
+	public Image getImg(){
+		ImageIcon ic = new ImageIcon("pokedex.png");
+		return ic.getImage();
+	 }
+	
 	public Rectangle getBounds(){
 		int intX = 10;					//(int) Math.ceil(600/15) ;
 		int intY = 10 ;			// (int) Math .ceil(600/15);

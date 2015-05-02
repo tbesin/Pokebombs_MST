@@ -21,6 +21,9 @@ public class GamePanel extends JPanel {
 	private JMenuItem item1 = new JMenuItem("Nouvelle partie");
 	private JMenuItem item2 = new JMenuItem("Aide");
 	
+	
+	public static ArrayList<Entity> entities = GameController.getEntityList() ;////
+	
 	public static ArrayList<Bomb> bombs = GameController.getBombList() ;
 	static ArrayList<Explosion> explosions = GameController.getExplosionList();
 	static ArrayList<Enemy> enemies = GameController.getEnemyList();
@@ -65,6 +68,13 @@ public class GamePanel extends JPanel {
 		int inty = (int) Math .ceil(600/15);
 		
 		
+		//tout
+		for(int i = 0 ; i < entities.size() ; i++){
+			Entity cus = entities.get(i);
+			draw(g2d, cus.getImg(), cus.getX(), cus.getY() );
+		}
+		
+		/*
 		//les cases + vitesse
 		for(int i = 0 ; i < speedCases.size() ; i++){
 			CaseUpSpeed cus = speedCases.get(i);
@@ -178,7 +188,7 @@ public class GamePanel extends JPanel {
 			CasePousseBomb cpb = casePousseBomb.get(i);
 			g2d.drawImage(cpb.getCasePousseBombImg(), cpb.getX()+5, cpb.getY()+5,null);
 			//g2d.draw(cpb.getBounds());
-		}
+		}*/
 		//les joueurs
 				for(int i = 0 ; i < players.size() ; i++ ){
 					Player tempPlayer = players.get(i);

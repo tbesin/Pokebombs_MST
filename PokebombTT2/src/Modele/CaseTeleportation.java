@@ -32,6 +32,13 @@ public class CaseTeleportation extends Entity {
 	return ic.getImage();
  }
 	
+	public Image getImg(boolean teleportationIn){
+		ImageIcon ic = new ImageIcon();
+		if(teleportationIn) ic = new ImageIcon("porteIn.png");
+		else ic = new ImageIcon("porteOut.png");
+		return ic.getImage();
+	 }
+	
 	public Rectangle getBounds(){
 		int intX = (int) Math.ceil(600/15);
 		int intY = (int) Math .ceil(600/15);

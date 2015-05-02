@@ -59,17 +59,22 @@ public class Bomb extends Entity implements ActionListener {
 		checkGoBomb(player);
 		checkPousseBomb(player);
 		if (this.canGoBomb == 0) moveBomb();
-		if (GameController.bombPose=true && n==0){missiletimer = new Timer(3000,this);missiletimer.start();}
+		if (GameController.bombPose=true && n==0){missiletimer = new Timer(2000,this);missiletimer.start();}
 		n++;
 		}
 	
-	public static Image getBombImg(){
+	/*public Image getBombImg(){
+		ImageIcon ic = new ImageIcon("pokeball.png");
+		return ic.getImage();
+	}*/
+	
+	public Image getImg(){
 		ImageIcon ic = new ImageIcon("pokeball.png");
 		return ic.getImage();
 	}
 	
 	public Rectangle getBounds(){
-		return new Rectangle(x+velX, y+velY, getBombImg().getWidth(null), getBombImg().getHeight(null));
+		return new Rectangle(x+velX, y+velY, getImg().getWidth(null), getImg().getHeight(null));
 	}
 	
 	public void checkGoBomb(Player p){
@@ -80,13 +85,13 @@ public class Bomb extends Entity implements ActionListener {
 	public void checkPousseBomb(Player p){
 		//System.out.println(this.directionBomb);
 		if(p.getPousseBomb()&& this.directionBomb != null && this.canGoBomb==0){
-			if(this.directionBomb=="Ouest") this.velX= -4;
-			if(this.directionBomb=="Est") this.velX= 4;
-			if(this.directionBomb=="Sud") this.velY= 4;
-			if(this.directionBomb=="Nord") this.velX= -4;
+			if(this.directionBomb=="Ouest") this.velX=-8;
+			if(this.directionBomb=="Est") this.velX=8;
+			if(this.directionBomb=="Sud") this.velY=8;
+			if(this.directionBomb=="Nord") this.velY=-8;
 		}
 		nearBomb();
-		//checkLimite();
+		checkLimite();
 	}
 
 	public void moveBomb(){
@@ -123,12 +128,12 @@ public class Bomb extends Entity implements ActionListener {
 	}
 
 public void checkLimite(){
-	//if (x>=560) x=560;
+	//if (x>=560){ x=560;}
 	if (x>=160) x=160;
-	if (x<=0) x =0;
+	if (x<=0) {x =0;}
 	//if (y>=560) y=560;
 	if (y>=160) y=160;
-	if (y<= 13) y= 13;
+	if (y<=13) y=13;
 }
 
 
@@ -162,6 +167,7 @@ public void interact(Player p){
 	if (p.getPlayerGoBomb()==false) p.setCanGo(1);
 	if (p.getPousseBomb()&& p.getCanGo()==1){
 		this.directionBomb = p.getDirection();
+		System.out.println(p.getDirection()+ this.directionBomb);
 	}
 }
 

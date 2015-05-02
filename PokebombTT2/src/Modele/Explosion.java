@@ -88,6 +88,39 @@ public class Explosion extends Entity implements ActionListener {
 		return ic.getImage();
 	}
 	
+	
+	
+public Image getImg(){
+		
+		ImageIcon ic = new ImageIcon("DeflagrationDown2.png");
+		
+		if(this.playerNumber == 1){
+			if(this.imgNumber == 2){
+				ic = new ImageIcon("pikachu_bombe.png");
+			}
+			
+			else if(this.imgNumber == 3){
+				ic = new ImageIcon("Electric_attack_left1.png");
+			}
+			
+			else if(this.imgNumber == 4){
+				ic = new ImageIcon("Electric_attack_up1.png");
+			}
+		}
+		
+		if(this.playerNumber == 2){
+			if(this.imgNumber == 2){
+				ic = new ImageIcon("salameche_bombe1.png");
+			}
+			
+			else {
+				ic = new ImageIcon("petite_flamme.png");
+			}
+		}
+		
+		return ic.getImage();
+	}
+	
 	public Rectangle getBounds(){
 		//int intX = (int) Math.ceil(600/15);
 		//int intY = (int) Math .ceil(600/15);

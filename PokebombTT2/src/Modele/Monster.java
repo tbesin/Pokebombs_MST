@@ -62,6 +62,23 @@ public class Monster extends Entity {
 		return ic.getImage();
 	}
 	
+	public Image getImg(){	
+		ImageIcon ic = new ImageIcon();
+		if(directionMonster == "Sud"){
+			ic =new ImageIcon("MonsterDown.png");
+		}
+		if(directionMonster == "Nord"){
+				ic = new ImageIcon("MonsterUp.png");
+		}
+		if(directionMonster == "Ouest"){
+			ic = new ImageIcon("LinkRunLeft1.png");
+		}
+		if(directionMonster == "Est"){
+			ic = new ImageIcon("LinkRunRight3.png");
+		}
+		return ic.getImage();
+	}
+	
 	
 	public Rectangle getBounds(){	
 		return new Rectangle(x+10, y+10, (600/15)-20,(600/15)-20);

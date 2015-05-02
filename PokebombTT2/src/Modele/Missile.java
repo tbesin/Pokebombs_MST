@@ -47,6 +47,21 @@ public class Missile extends Entity {
 		return ic.getImage();
 	}
 	
+	
+	public Image getImg(){
+		ImageIcon ic = new ImageIcon("ArrowUp1.png");
+		if(direction == "Sud"){
+			ic = new ImageIcon("ArrowDown1.png");
+		}
+		else if(direction == "Ouest"){
+			ic = new ImageIcon("ArrowLeft1.png");
+		}
+		else if(direction == "Est"){
+			ic = new ImageIcon("ArrowRight1.png");
+		}
+		return ic.getImage();
+	}
+	
 	public Rectangle getBounds(){
 		return new Rectangle(x , y, getMissileImg().getWidth(null), getMissileImg().getHeight(null));
 	}

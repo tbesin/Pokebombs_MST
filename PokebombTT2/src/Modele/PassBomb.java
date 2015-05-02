@@ -19,6 +19,11 @@ public class PassBomb extends Entity{
 	ImageIcon ic = new ImageIcon("passBomb.png");
 	return ic.getImage();
  }
+	
+	public Image getImg(){
+		ImageIcon ic = new ImageIcon("passBomb.png");
+		return ic.getImage();
+	 }
 	public Rectangle getBounds(){
 		int intX = (int) Math.ceil(600/15);
 		int intY = (int) Math .ceil(600/15);

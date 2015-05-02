@@ -32,6 +32,13 @@ public class Interrupteur extends Entity{
 	return ic.getImage();
  }
 	
+	public Image getImg(boolean interrupteurOn){
+		ImageIcon ic = new ImageIcon();
+		if(interrupteurOn) ic = new ImageIcon("interrupteurOn.png");
+		else ic = new ImageIcon("interrupteurOff.png");
+		return ic.getImage();
+	 }
+	
 	public Rectangle getBounds(){
 		int intX = 20 ;					//(int) Math.ceil(600/15) ;
 		int intY = 20 ;			// (int) Math .ceil(600/15);
@@ -62,7 +69,7 @@ public class Interrupteur extends Entity{
 	}
 	public void interact(Monster p){
 		ArrayList<CaseTeleportation> teleportation = GameController.getCaseTeleportationList() ;
-		if (p.getInterrupteurUse()){
+		if (p.getInterrupteurUse()&&teleportation.size()>1){
 		for (int i =0; i< teleportation.size();i++){
 			CaseTeleportation tempTeleportation = teleportation.get(i);
 			if (tempTeleportation.getTeleportationIn()) tempTeleportation.setTeleportationIn(false);

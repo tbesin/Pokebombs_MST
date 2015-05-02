@@ -35,7 +35,7 @@ public class BarreInfo extends JPanel {
 		   Font font = new Font("Courier", Font.BOLD, 20);
 		   g.setFont(font);
 		   g.setColor(Color.black); 
-		   for (int i =0; i<GameController.getPlayerList().size();i++){
+		  /* for (int i =0; i<GameController.getPlayerList().size();i++){
 			   if (GameController.getPlayerList().get(i).getPousseBomb())
 				   g.drawImage(CasePousseBomb.getCasePousseBombImg(), 20, 60+30*i , 30, 30, this);
 		   }  
@@ -48,6 +48,6 @@ public class BarreInfo extends JPanel {
 			   g.drawString(""+GameController.getPlayerList().get(i).getSpeed(), 20+30*i, 330);			   
 		   }
 
-	}
+	}*/
 }
 }

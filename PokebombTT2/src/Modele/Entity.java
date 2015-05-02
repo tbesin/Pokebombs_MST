@@ -21,7 +21,7 @@ public abstract class Entity {
 		
 	}
 	
-	public Image getEntityImg(){
+	public Image getImg(){
 		return null;
 		
 	}

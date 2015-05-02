@@ -24,6 +24,11 @@ public class CaseUpSpeed extends Entity {
 		return ic.getImage();
 	}
 	
+	public Image getImg(){
+		ImageIcon ic = new ImageIcon("bonusVelo.png");
+		return ic.getImage();
+	}
+	
 	public Rectangle getBounds(){
 		return new Rectangle(x , y, getCaseUpSpeedImg().getWidth(null), getCaseUpSpeedImg().getHeight(null));
 	}
