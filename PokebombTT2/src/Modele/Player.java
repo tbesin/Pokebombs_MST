@@ -214,6 +214,21 @@ public class Player extends Entity {
 			}
 		}
 		
+		if(this.playerNumber == 4){							//joueur 4
+			if(direction == "Sud"){
+				ic = new ImageIcon("Player2down1.png");
+			}
+			else if(direction == "Nord"){
+				ic = new ImageIcon("Player2up1.png");
+			}
+			else if(direction == "Ouest"){
+				ic = new ImageIcon("Player2left1.png");
+			}
+			else if(direction == "Est"){
+				ic = new ImageIcon("Player2right1.png");
+			}
+		}
+		
 		return ic.getImage();
 	}
 	

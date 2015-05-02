@@ -21,7 +21,7 @@ public class EditorBoard extends JPanel implements MouseListener, MouseMotionLis
 	
 	//attributs
 	String Editeur[][] = new String[15][15];		//tableau à deux dim pour positionner les éléments
-	String ImageSelect[] = {"MUR","BLOC","JOUEUR","OBJECTIF","UPBOMB", "UPLIFE"} ;		//tableau à une dim pour savoir ce qu'on sélectionne
+	String ImageSelect[] = {"MUR","BLOC","JOUEUR","OBJECTIF","UPBOMB", "UPLIFE", "TELEPORTATION", "PIEGE", "MONSTRE1", "MONSTRE2", "INTERRUPTEUR", "PASSBOMB", "POUSSEBOMBE"} ;		//tableau à une dim pour savoir ce qu'on sélectionne
 	String ImageCourante = "MUR" ; 		//image à dessiner
 	int mX, mY ;		//position de la souris
 	int indexInc = 0 ;
@@ -33,6 +33,15 @@ public class EditorBoard extends JPanel implements MouseListener, MouseMotionLis
 	Image objectif ;
 	Image upBomb ;
 	Image upLife ;
+	
+	Image teleportation ;
+	Image piege ;
+	Image monstre1 ;
+	Image monstre2 ;
+	Image interrupteur ;
+	Image passbomb ;
+	Image poussebombe ;
+	
 	
 	//pour les fichiers
 	FileWriter fw ;
@@ -63,8 +72,30 @@ public class EditorBoard extends JPanel implements MouseListener, MouseMotionLis
 		ImageIcon iUpBomb = new ImageIcon("BombBonus.png");
 		upBomb = iUpBomb.getImage();
 		
-		ImageIcon iUpLife = new ImageIcon("BonusVie.png");
+		ImageIcon iUpLife = new ImageIcon("baieVie1.png");
 		upLife = iUpLife.getImage();
+		
+		
+		ImageIcon iTeleportation = new ImageIcon("porteIn.png");
+		teleportation = iTeleportation.getImage();
+		
+		ImageIcon iPiege = new ImageIcon("kabuto.png");
+		piege = iPiege.getImage();
+		
+		ImageIcon iMonstre1 = new ImageIcon("monsterDown.png");
+		monstre1 = iMonstre1.getImage();
+		
+		ImageIcon iMonstre2 = new ImageIcon("monsterUp.png");
+		monstre2 = iMonstre2.getImage();
+		
+		ImageIcon iInterrupteur = new ImageIcon("interrupteurOFF.png");
+		interrupteur = iInterrupteur.getImage();
+		
+		ImageIcon iPassbomb = new ImageIcon("passBomb.png");
+		passbomb = iPassbomb.getImage();
+		
+		ImageIcon iPoussebombe = new ImageIcon("casePousseBomb.png");
+		poussebombe = iPoussebombe.getImage();
 		
 		this.setFocusable(true);		//autorise les listeners sur le panel
 		
@@ -105,8 +136,39 @@ public class EditorBoard extends JPanel implements MouseListener, MouseMotionLis
 				else if(Editeur[i][j] == "UPLIFE"){
 					g2d.drawImage(upLife, i*this.tailleCase, j*this.tailleCase, null);
 				}
+				
+				
+				
+				else if(Editeur[i][j] == "TELEPORTATION"){
+					g2d.drawImage(teleportation, i*this.tailleCase, j*this.tailleCase, null);
+				}
+				
+				else if(Editeur[i][j] == "PIEGE"){
+					g2d.drawImage(piege, i*this.tailleCase, j*this.tailleCase, null);
+				}
+				
+				else if(Editeur[i][j] == "MONSTRE1"){
+					g2d.drawImage(monstre1, i*this.tailleCase, j*this.tailleCase, null);
+				}
+				
+				else if(Editeur[i][j] == "MONSTRE2"){
+					g2d.drawImage(monstre2, i*this.tailleCase, j*this.tailleCase, null);
+				}
+				
+				else if(Editeur[i][j] == "INTERRUPTEUR"){
+					g2d.drawImage(interrupteur, i*this.tailleCase, j*this.tailleCase, null);
+				}
+				
+				else if(Editeur[i][j] == "PASSBOMB"){
+					g2d.drawImage(passbomb, i*this.tailleCase, j*this.tailleCase, null);
+				}
+				
+				else if(Editeur[i][j] == "POUSSEBOMBE"){
+					g2d.drawImage(poussebombe, i*this.tailleCase, j*this.tailleCase, null);
+				}
 			}
 		}
+		
 		
 		if(ImageCourante == "MUR" ){
 			g2d.drawImage(mur, mX, mY, null);
@@ -130,6 +192,35 @@ public class EditorBoard extends JPanel implements MouseListener, MouseMotionLis
 		
 		else if(ImageCourante == "UPLIFE" ){
 			g2d.drawImage(upLife, mX, mY, null);
+		}
+		
+		
+		else if(ImageCourante == "TELEPORTATION" ){
+			g2d.drawImage(teleportation, mX, mY, null);
+		}
+		
+		else if(ImageCourante == "PIEGE" ){
+			g2d.drawImage(piege, mX, mY, null);
+		}
+		
+		else if(ImageCourante == "MONSTRE1" ){
+			g2d.drawImage(monstre1, mX, mY, null);
+		}
+		
+		else if(ImageCourante == "MONSTRE2" ){
+			g2d.drawImage(monstre2, mX, mY, null);
+		}
+		
+		else if(ImageCourante == "INTERRUPTEUR" ){
+			g2d.drawImage(interrupteur, mX, mY, null);
+		}
+		
+		else if(ImageCourante == "PASSBOMB" ){
+			g2d.drawImage(passbomb, mX, mY, null);
+		}
+		
+		else if(ImageCourante == "POUSSEBOMBE" ){
+			g2d.drawImage(poussebombe, mX, mY, null);
 		}
 		
 	}
@@ -246,6 +337,35 @@ public class EditorBoard extends JPanel implements MouseListener, MouseMotionLis
 						else if(Editeur[j][i] == "UPLIFE"){
 							fw.write("5");
 						}
+						
+						
+						else if(Editeur[j][i] == "TELEPORTATION"){
+							fw.write("6");
+						}
+						
+						else if(Editeur[j][i] == "PIEGE"){
+							fw.write("7");
+						}
+						
+						else if(Editeur[j][i] == "MONSTRE1"){
+							fw.write("8");
+						}
+						
+						else if(Editeur[j][i] == "MONSTRE2"){
+							fw.write("9");
+						}
+						
+						else if(Editeur[j][i] == "INTERRUPTEUR"){
+							fw.write("A");
+						}
+						
+						else if(Editeur[j][i] == "PASSBOMB"){
+							fw.write("B");
+						}
+						
+						else if(Editeur[j][i] == "POUSSEBOMBE"){
+							fw.write("C");
+						}
 					}
 					fw.write("\r\n");
 				}
@@ -295,6 +415,37 @@ public class EditorBoard extends JPanel implements MouseListener, MouseMotionLis
 						Editeur[x][y] = "UPLIFE";
 					}
 					
+					
+					else if(strImg == '6'){
+						Editeur[x][y] = "TELEPORTATION";
+					}
+					
+					else if(strImg == '7'){
+						Editeur[x][y] = "PIEGE";
+					}
+					
+					else if(strImg == '8'){
+						Editeur[x][y] = "MONSTRE1";
+					}
+					
+					else if(strImg == '9'){
+						Editeur[x][y] = "MONSTRE2";
+					}
+					
+					else if(strImg == 'A'){
+						Editeur[x][y] = "INTERRUPTEUR";
+					}
+					
+					else if(strImg == 'B'){
+						Editeur[x][y] = "PASSBOMB";
+					}
+					
+					else if(strImg == 'C'){
+						Editeur[x][y] = "POUSSEBOMBE";
+					}
+					
+					
+					
 					else if(strImg == '\r' || strImg == '\n'){
 						x-- ;
 					}
@@ -335,7 +486,7 @@ public class EditorBoard extends JPanel implements MouseListener, MouseMotionLis
 		}
 		
 		else if(rot >0){
-			if(indexInc < 3){
+			if(indexInc < 12){
 				indexInc++ ;
 			}
 		}

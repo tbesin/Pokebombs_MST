@@ -25,8 +25,8 @@ public class GameView extends JFrame implements ActionListener {
 	Timer mainTimer ;							
 	GameController controller ;
 	GamePanel pan ;
-	BarreInfo barreinfo;
-	BarreInfoSolo barreinfosolo;
+	BarreInfo barreinfo;				//barre d'informations sur l'état des joueurs
+	BarreInfoSolo barreinfosolo;		
 	
 	
 	//menu --> à mettre dans game panel => NON
@@ -43,13 +43,13 @@ public class GameView extends JFrame implements ActionListener {
 	}
 	
 	
-	public void InitToolbar(){
+	public void InitToolbar(){			//crée la barre d'aide tout au-dessus de la fenêtre
 		this.menu1.add(item1);
 		this.menu2.add(item2);
 		this.menuBar.add(menu1);
 		this.menuBar.add(menu2);
 		item2.addActionListener(new ActionListener(){
-    	public void actionPerformed(ActionEvent arg0){			//What ?
+    	public void actionPerformed(ActionEvent arg0){			//What ? => aller voir les classes anonymes
     		Help zd = new Help(null,"Aide",true);
     		}
     	});
@@ -60,7 +60,7 @@ public class GameView extends JFrame implements ActionListener {
 		this.setJMenuBar(menuBar);	
 	}
 	
-	public void InitMenu(){	
+	public void InitMenu(){							//lance le menu de départ
 		this.setSize(600,600);
 		this.menudepart = new GameMenu();
 		getContentPane().add(menudepart) ;
@@ -70,18 +70,21 @@ public class GameView extends JFrame implements ActionListener {
 				   menudepart.setVisible(false);		//juste le rendre invisible ne le tue pas ><
 			   }
 			 });
+		
 		GameMenu.p3.addActionListener(new ActionListener(){
 			   public void actionPerformed(ActionEvent event){
 				   GameViewlaunch(3);
 				   menudepart.setVisible(false);
 			   }
 			 });
+		
 		GameMenu.p4.addActionListener(new ActionListener(){
 			   public void actionPerformed(ActionEvent event){
 				   GameViewlaunch(4);
 				   menudepart.setVisible(false);
 			   }
 			 });
+		
 		GameMenu.p1.addActionListener(new ActionListener(){
 			   public void actionPerformed(ActionEvent event){
 				   GameSoloLaunch();
@@ -90,22 +93,22 @@ public class GameView extends JFrame implements ActionListener {
 			 });
 	}
 	
-		public void GameViewlaunch(int a){
+		public void GameViewlaunch(int a){					//permet de lancer les modes de jeu multijoueurs
 			this.controller = new GameController() ; //
 			
-			GameController.startGame(a);
+			GameController.startGame(a);	//lance le jeu
 			this.setSize(740,650);
 			this.setTitle("Bombermon !!!");
 			this.setFocusable(true);
 			
 			addKeyListener(controller);	
 			getContentPane().setLayout(null);
-			this.barreinfo = new BarreInfo();
+			this.barreinfo = new BarreInfo();	//lance la barre d'informations sur les joueurs
 			getContentPane().add(barreinfo);
 			Dimension size1 = barreinfo.getPreferredSize();
 			barreinfo.setBounds(600,0,size1.width, size1.height);
 			this.pan = new GamePanel();
-			getContentPane().add(pan) ;			//Où est défini pan ?
+			getContentPane().add(pan) ;
 			pan.setBounds(0,0,620, 620);
 			mainTimer = new Timer(10,this);
 			mainTimer.start();
@@ -113,11 +116,12 @@ public class GameView extends JFrame implements ActionListener {
 		}
 		
 		
-		public void GameSoloLaunch(){
+		public void GameSoloLaunch(){		//permet de lancer le jeu en mode solo
 			this.controller = new GameController() ;
 			
 			this.setTitle("Pokebombs !!!");	
-			this.setSize(430,250);
+			//this.setSize(430,250);
+			this.setSize(600,600);
 			this.setFocusable(true);
 			
 			addKeyListener(controller);
@@ -132,12 +136,12 @@ public class GameView extends JFrame implements ActionListener {
 			mainTimer.start();
 			//GameController.startGame();
 			//GameController.startGameSolo();
-			GameController.startGameSoloTuto();
+			GameController.startGameSolo();
 		}
 		
 		
 	public void actionPerformed(ActionEvent e) {		//à terminer
-		controller.update() ; 			//à modifier
+		controller.update() ; 			//à modifier !!!
 		repaint() ;
 		
 	}

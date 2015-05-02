@@ -288,6 +288,9 @@ public class GameController implements KeyListener {
 	}
 		
 		
+	
+	
+	
 
 	//DEMARRAGE ET FIN DU JEU
 	public static void startGame(int a){
@@ -378,7 +381,7 @@ public class GameController implements KeyListener {
 //mode solo
 
 	public static void startGameSolo(){
-		ArrayList tableau = listeCoord(5);
+		/*ArrayList tableau = listeCoord(5);
 		Player player= new Player(0,0,1);
 		player.setPousseBomb(true);
 		player.setLife(2);
@@ -403,7 +406,15 @@ public class GameController implements KeyListener {
 		addInterrupteur(new Interrupteur(0*(200/5),4*(200/5)));
 		addInterrupteur(new Interrupteur(4*(200/5),4*(200/5)));
 		addMonster(new Monster(1*(200/5),4*(200/5)));
-		addTrap(new Trap(2*(200/5),0*(200/5)));
+		addTrap(new Trap(2*(200/5),0*(200/5)));*/
+		ModeSolo solo = new ModeSolo("levelSolo3");
+		solo.startGame() ;
+		
+		for(int i = 0 ; i < caseTeleportation.size() ; i++){
+			CaseTeleportation ct = caseTeleportation.get(i);
+			if (i%2 != 0) ct.setTeleportationIn(false);
+		}
+		
 	}
 	
 	

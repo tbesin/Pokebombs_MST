@@ -12,6 +12,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 public class GameMenu extends JPanel implements ActionListener{
+	
    public static Bouton p2 = new Bouton("","2Joueurs.png",50,150,150,40);
    public static Bouton p3 = new Bouton("","3Joueurs.png",50,250,150,40);
    public static Bouton p4 = new Bouton("","4Joueurs.png",50,350,150,40);   

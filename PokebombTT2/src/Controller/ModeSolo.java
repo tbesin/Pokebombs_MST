@@ -6,11 +6,15 @@ import java.util.ArrayList;
 
 import Modele.BriqueCassable;
 import Modele.BriqueIncassable;
+import Modele.CasePousseBomb;
 import Modele.CaseTeleportation;
 import Modele.CaseUpBomb;
 import Modele.CaseUpLife;
 import Modele.Enemy;
 import Modele.Goal;
+import Modele.Interrupteur;
+import Modele.Monster;
+import Modele.PassBomb;
 import Modele.Player;
 import Modele.Trap;
 import Modele.TrapInterruptor;
@@ -29,6 +33,11 @@ public class ModeSolo {
 		public static ArrayList<CaseUpBomb> bombCases = GameController.getCaseUpBombList() ;
 		public static ArrayList<CaseUpLife> lifeCases = GameController.getCaseUpLifeList() ;
 		
+		
+		public static ArrayList<CasePousseBomb> casePousseBomb = GameController.getCasePousseBombList() ;
+		public static ArrayList<PassBomb> passBomb = GameController.getPassBombList() ;
+		public static ArrayList<Interrupteur> interrupteur = GameController.getInterrupteurList() ;
+		public static ArrayList<Monster> monsters = GameController.getMonsterList() ;
 		public static ArrayList<CaseTeleportation> caseTeleportation = GameController.getCaseTeleportationList() ;
 		
 		FileReader fr ;
@@ -118,6 +127,10 @@ public class ModeSolo {
 					
 					else if(strImg == '2'){
 						players.add(new Player(x,y, 1) );
+						
+						if(this.choosenLevel == "levelSolo3"){
+							players.get(0).setPousseBomb(true);
+						}
 					}
 					
 					else if(strImg == '3'){
@@ -130,6 +143,35 @@ public class ModeSolo {
 					
 					else if(strImg == '5'){
 						lifeCases.add(new CaseUpLife(this.tailleCase*x, this.tailleCase*y));
+					}
+					
+					
+					else if(strImg == '6'){
+						caseTeleportation.add(new CaseTeleportation(this.tailleCase*x, this.tailleCase*y));
+					}
+					
+					else if(strImg == '7'){
+						traps.add(new Trap(this.tailleCase*x, this.tailleCase*y));
+					}
+					
+					else if(strImg == '8'){
+						monsters.add(new Monster(this.tailleCase*x, this.tailleCase*y));
+					}
+					
+					else if(strImg == '9'){
+						monsters.add(new Monster(this.tailleCase*x, this.tailleCase*y));
+					}
+					
+					else if(strImg == 'A'){
+						interrupteur.add(new Interrupteur(this.tailleCase*x, this.tailleCase*y));
+					}
+					
+					else if(strImg == 'B'){
+						passBomb.add(new PassBomb(this.tailleCase*x, this.tailleCase*y));
+					}
+					
+					else if(strImg == 'C'){
+						this.casePousseBomb.add(new CasePousseBomb(this.tailleCase*x, this.tailleCase*y));
 					}
 					
 					
