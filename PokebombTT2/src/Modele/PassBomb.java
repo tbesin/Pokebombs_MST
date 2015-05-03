@@ -15,23 +15,14 @@ public class PassBomb extends Entity{
 	public void update(){
 	}
 	
-	public Image getPassBombImg(){
-	ImageIcon ic = new ImageIcon("passBomb.png");
-	return ic.getImage();
- }
 	
 	public Image getImg(){
 		ImageIcon ic = new ImageIcon("passBomb.png");
 		return ic.getImage();
 	 }
-	public Rectangle getBounds(){
-		int intX = (int) Math.ceil(600/15);
-		int intY = (int) Math .ceil(600/15);
-		return new Rectangle(x,y,intX,intY);
-	}
-	public void interact(Player p){	
+	
+	public void interact(Player p){	//interface ???
 		p.setCanGo(1);
 	}
-	public void interact(Bomb b){
-	}
+	
 }

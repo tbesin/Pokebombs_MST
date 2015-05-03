@@ -19,23 +19,20 @@ public class CaseUpSpeed extends Entity {
 	public void update(){
 	}
 	
-	public Image getCaseUpSpeedImg(){
-		ImageIcon ic = new ImageIcon("bonusVelo.png");
-		return ic.getImage();
-	}
-	
 	public Image getImg(){
 		ImageIcon ic = new ImageIcon("bonusVelo.png");
 		return ic.getImage();
 	}
 	
 	public Rectangle getBounds(){
-		return new Rectangle(x , y, getCaseUpSpeedImg().getWidth(null), getCaseUpSpeedImg().getHeight(null));
+		return new Rectangle(x , y, getImg().getWidth(null), getImg().getHeight(null));
 	}
 	
 	
 	public void interact(Player p){			// dit au joueur ce qu'il doit faire en cas de collision
-		if (p.getSpeed()<4){p.setSpeed(p.getSpeed() + 1);}
+		if (p.getSpeed()<4){
+			p.setSpeed(p.getSpeed() + 1);
+		}
 		GameController.getCaseUpSpeedList().remove(this);
 	}
 

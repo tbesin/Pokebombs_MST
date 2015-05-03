@@ -25,26 +25,12 @@ public class CaseTeleportation extends Entity {
 		this.teleportationIn = bool;
 	}
 	
-	public Image getCaseTeleportationImg(boolean teleportationIn){
-	ImageIcon ic = new ImageIcon();
-	if(teleportationIn) ic = new ImageIcon("porteIn.png");
-	else ic = new ImageIcon("porteOut.png");
-	return ic.getImage();
- }
-	
-	public Image getImg(boolean teleportationIn){
+	public Image getImg(){
 		ImageIcon ic = new ImageIcon();
 		if(teleportationIn) ic = new ImageIcon("porteIn.png");
 		else ic = new ImageIcon("porteOut.png");
 		return ic.getImage();
 	 }
-	
-	public Rectangle getBounds(){
-		int intX = (int) Math.ceil(600/15);
-		int intY = (int) Math .ceil(600/15);
-		return new Rectangle(x,y,intX,intY);
-	}
-	
 	
 	
 	public void useCaseTeleportation(){
@@ -63,4 +49,5 @@ public class CaseTeleportation extends Entity {
 			}
 		}
 	}
+	
 }

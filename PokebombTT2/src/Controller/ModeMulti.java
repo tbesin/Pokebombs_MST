@@ -8,9 +8,13 @@ import java.util.ArrayList;
 
 
 
+
+
+
 import Modele.BriqueCassable;
 import Modele.BriqueIncassable;
 import Modele.Enemy;
+import Modele.Entity;
 import Modele.Goal;
 import Modele.Player;
 import Modele.Trap;
@@ -19,6 +23,16 @@ import Modele.TrapInterruptor;
 public class ModeMulti {
 	
 	//attributs
+	/*static ArrayList<Enemy> enemies = GameController.enemies;
+	public static ArrayList<BriqueIncassable> briqueIncassables =GameController.briqueIncassables;
+	public static ArrayList<Player> players = GameController.players ;
+	public static ArrayList<BriqueCassable> breakables = GameController.breakables ;
+	public static ArrayList<Trap> traps = GameController.traps ;
+	public static ArrayList<TrapInterruptor> trapInterruptors = GameController.trapInterruptors ;
+	public static ArrayList<Goal> goals = GameController.goals ;
+	
+	public static ArrayList<Entity> entities = GameController.entities ;*/
+	
 	static ArrayList<Enemy> enemies = GameController.getEnemyList();
 	public static ArrayList<BriqueIncassable> briqueIncassables =GameController.getBriqueIncassableList();
 	public static ArrayList<Player> players = GameController.getPlayerList() ;
@@ -26,6 +40,8 @@ public class ModeMulti {
 	public static ArrayList<Trap> traps = GameController.getTrapList() ;
 	public static ArrayList<TrapInterruptor> trapInterruptors = GameController.getTrapInterruptorList() ;
 	public static ArrayList<Goal> goals = GameController.getGoalList() ;
+	
+	public static ArrayList<Entity> entities = GameController.getEntityList() ;
 	
 	int nombreJoueurs ;
 	
@@ -85,6 +101,11 @@ public class ModeMulti {
 			else if (i==3) players.add(new Player(0,630, 4));
 		}
 		
+		for(int i = 0 ; i < players.size() ; i++){
+			players.get(i).setMode("multi");
+			System.out.println(players.get(i).getMode());
+		}
+		
 		/*trapInterruptors.add(new TrapInterruptor(5, 525));
 		traps.add(new Trap(560, 05));
 		goals.add(new Goal(5, 550)) ; */
@@ -132,6 +153,15 @@ public class ModeMulti {
 				}
 			}
 			fr.close();
+			
+			
+			
+			
+			
+			/*for(int j = 0 ; j < entities.size() ; j++){
+				entities.get(j).setMode("multi");
+				System.out.println("b");
+			}*/
 		}
 		
 		catch(Exception ex){

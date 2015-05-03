@@ -17,10 +17,6 @@ public class Trap extends Entity{
 	public void update(){
 	}
 	
-	public Image getTrapImg(){
-	ImageIcon ic = new ImageIcon("kabuto.png");
-	return ic.getImage();
- }
 	
 	public Image getImg(){
 		ImageIcon ic = new ImageIcon("kabuto.png");
@@ -34,7 +30,9 @@ public class Trap extends Entity{
 	}
 	
 	public void checkGoTrap(Player p){
-		if (p.getBounds().intersects(this.getBounds())){p.setPlayerGoTrap(true);}
+		if (p.getBounds().intersects(this.getBounds())){
+			p.setPlayerGoTrap(true);
+			}
 		else {p.setPlayerGoTrap(false);}
 	}
 	

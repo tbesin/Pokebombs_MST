@@ -18,22 +18,11 @@ public class Goal extends Entity{
 	public void update(){
 	}
 	
-	public Image getGoalImg(){
-	ImageIcon ic = new ImageIcon("ProfChen.png");
-	return ic.getImage();
- }
-	
 	public Image getImg(){
 		ImageIcon ic = new ImageIcon("ProfChen.png");
 		return ic.getImage();
 	 }
 	
-	
-	public Rectangle getBounds(){
-		int intX = (int) Math.ceil(600/15) ;
-		int intY = (int) Math .ceil(600/15);
-		return new Rectangle(x,y,intX,intY);
-	}
 	
 	public void interact(Player p){	
 		p.setCanGo(1);

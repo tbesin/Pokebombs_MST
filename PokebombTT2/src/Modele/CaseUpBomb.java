@@ -17,10 +17,6 @@ public class CaseUpBomb extends Entity {
 	public void update(){
 	}
 	
-	public Image getCaseUpBombImg(){
-		ImageIcon ic = new ImageIcon("BombBonus.png");
-		return ic.getImage();
-	}
 	
 	public Image getImg(){
 		ImageIcon ic = new ImageIcon("BombBonus.png");
@@ -28,7 +24,7 @@ public class CaseUpBomb extends Entity {
 	}
 	
 	public Rectangle getBounds(){
-		return new Rectangle(x , y, getCaseUpBombImg().getWidth(null), getCaseUpBombImg().getHeight(null));
+		return new Rectangle(x , y, getImg().getWidth(null), getImg().getHeight(null));
 	}
 	
 	

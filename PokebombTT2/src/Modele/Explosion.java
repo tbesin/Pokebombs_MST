@@ -24,6 +24,7 @@ public class Explosion extends Entity implements ActionListener {
 	private int imgNumber;		//permet de déterminer quelle image mettre
 	boolean ExplosionActif = true;
 	int playerNumber ;
+	String choosenLevel ;
 	
 	
 	//constructeur
@@ -39,7 +40,9 @@ public class Explosion extends Entity implements ActionListener {
 	}
 	
 	public void update(){
-		if (n==0){explosiontimer = new Timer(500,this);explosiontimer.start();checkCollisions();}
+		if (n==0){explosiontimer = new Timer(500,this);
+		explosiontimer.start();
+		checkCollisions();}
 		n++;
 		
 	}
@@ -57,93 +60,61 @@ public class Explosion extends Entity implements ActionListener {
 	
 	
 	
-	public Image getExplosionImg(){
-		
-		ImageIcon ic = new ImageIcon("DeflagrationDown2.png");
-		
-		if(this.playerNumber == 1){
-			if(this.imgNumber == 2){
-				ic = new ImageIcon("pikachu_bombe.png");
-			}
-			
-			else if(this.imgNumber == 3){
-				ic = new ImageIcon("Electric_attack_left1.png");
-			}
-			
-			else if(this.imgNumber == 4){
-				ic = new ImageIcon("Electric_attack_up1.png");
-			}
-		}
-		
-		if(this.playerNumber == 2){
-			if(this.imgNumber == 2){
-				ic = new ImageIcon("salameche_bombe1.png");
-			}
-			
-			else {
-				ic = new ImageIcon("petite_flamme.png");
-			}
-		}
-		
-		return ic.getImage();
-	}
 	
-	
-	
-public Image getImg(){
-		
-		ImageIcon ic = new ImageIcon("DeflagrationDown2.png");
-		
-		if(this.playerNumber == 1){
-			if(this.imgNumber == 2){
-				ic = new ImageIcon("pikachu_bombe.png");
+	public Image getImg(){
+			
+			ImageIcon ic = new ImageIcon("DeflagrationDown2.png");
+			
+			if(this.playerNumber == 1){
+				if(this.imgNumber == 2){
+					ic = new ImageIcon("pikachu_bombe.png");
+				}
+				
+				else if(this.imgNumber == 3){
+					ic = new ImageIcon("Electric_attack_left1.png");
+				}
+				
+				else if(this.imgNumber == 4){
+					ic = new ImageIcon("Electric_attack_up1.png");
+				}
 			}
 			
-			else if(this.imgNumber == 3){
-				ic = new ImageIcon("Electric_attack_left1.png");
+			if(this.playerNumber == 2){
+				if(this.imgNumber == 2){
+					ic = new ImageIcon("salameche_bombe1.png");
+				}
+				
+				else {
+					ic = new ImageIcon("petite_flamme.png");
+				}
 			}
 			
-			else if(this.imgNumber == 4){
-				ic = new ImageIcon("Electric_attack_up1.png");
-			}
+			return ic.getImage();
 		}
-		
-		if(this.playerNumber == 2){
-			if(this.imgNumber == 2){
-				ic = new ImageIcon("salameche_bombe1.png");
-			}
-			
-			else {
-				ic = new ImageIcon("petite_flamme.png");
-			}
-		}
-		
-		return ic.getImage();
-	}
 	
 	public Rectangle getBounds(){
-		//int intX = (int) Math.ceil(600/15);
-		//int intY = (int) Math .ceil(600/15);
 		return new Rectangle(x,y,40,40);
 	}
 	
 	public void checkCollisions(){
-		int lvl = 1;
+		int lvl = 1;			//à changer après avec choosenlevl
 		ArrayList<BriqueCassable> breakables = GameController.getBreakableList();
 		for(int i = 0 ; i < breakables.size(); i++){
 			BriqueCassable tempEnemy = breakables.get(i);
 			if( getBounds().intersects(tempEnemy.getBounds() )&& this.getExplosionActif() ) {
 				this.setExplosionActif(false);
 				GameController.removeBreakable(tempEnemy);
-				GameController.BonusSolo(lvl, tempEnemy.getX(), tempEnemy.getY());
-				//n = GameController.choix();
-				//System.out.println(n);
-				//GameController.Bonus(n,tempEnemy.getX(),tempEnemy.getY());
+				if(mode == "solo"){
+					GameController.BonusSolo(lvl, tempEnemy.getX(), tempEnemy.getY());
+				}
+				if(mode == "multi"){
+					GameController.Bonus(GameController.choix(),tempEnemy.getX(),tempEnemy.getY());
+				}
 			}
 			
 		}
 		
-		ArrayList<Trap> traps = GameController.getTrapList();
+		ArrayList<Trap> traps = GameController.getTrapList();//faire une interface pour détruire les trucs avec les explposions
 		for(int i = 0 ; i <traps.size(); i++){
 			Trap t = traps.get(i);
 			if( getBounds().intersects(t.getBounds() ) && this.getExplosionActif()) {

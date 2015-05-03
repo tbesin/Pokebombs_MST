@@ -17,18 +17,13 @@ public class CaseUpLife extends Entity {
 	public void update(){
 	}
 	
-	public Image getCaseUpLifeImg(){
-		ImageIcon ic = new ImageIcon("baieVie1.png");
-		return ic.getImage();
-	}
-	
 	public Image getImg(){
 		ImageIcon ic = new ImageIcon("baieVie1.png");
 		return ic.getImage();
 	}
 	
 	public Rectangle getBounds(){
-		return new Rectangle(x , y, getCaseUpLifeImg().getWidth(null), getCaseUpLifeImg().getHeight(null));
+		return new Rectangle(x , y, getImg().getWidth(null), getImg().getHeight(null));
 	}
 	
 	

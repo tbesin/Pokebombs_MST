@@ -31,7 +31,7 @@ public class BarreInfoSolo extends JPanel{
 		   g.setFont(font);
 		   g.setColor(Color.black);          
 		   //g.drawString((String), 10, 20);
-		   for (int i =0; i<GameController.getPlayerList().size();i++){
+		  /* for (int i =0; i<GameController.getPlayerList().size();i++){
 			   if (GameController.getPlayerList().get(i).getPousseBomb())
 				   g.drawImage(CasePousseBomb.getCasePousseBombImg(), 20, 60+30*i , 30, 30, this);
 			  }
@@ -46,7 +46,7 @@ public class BarreInfoSolo extends JPanel{
 		   
 		   }
 
-	}
+	}*/
 	}
 }
 

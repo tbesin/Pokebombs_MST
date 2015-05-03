@@ -25,17 +25,11 @@ public class Interrupteur extends Entity{
 	}
 
 	
-	public Image getInterrupteurImg(boolean interrupteurOn){
-	ImageIcon ic = new ImageIcon();
-	if(interrupteurOn) ic = new ImageIcon("interrupteurOn.png");
-	else ic = new ImageIcon("interrupteurOff.png");
-	return ic.getImage();
- }
-	
-	public Image getImg(boolean interrupteurOn){
+	public Image getImg(){
 		ImageIcon ic = new ImageIcon();
 		if(interrupteurOn) ic = new ImageIcon("interrupteurOn.png");
 		else ic = new ImageIcon("interrupteurOff.png");
+		System.out.println("b");
 		return ic.getImage();
 	 }
 	

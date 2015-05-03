@@ -15,10 +15,6 @@ public class BriqueIncassable extends Entity{
 	public void update(){
 	}
 	
-	public Image getBriqueIncassableImg(){
-	ImageIcon ic = new ImageIcon("petit_rocher.png");
-	return ic.getImage();
- }
 	
 	public Image getImg(){
 		ImageIcon ic = new ImageIcon("petit_rocher.png");
