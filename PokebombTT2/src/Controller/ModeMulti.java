@@ -65,7 +65,7 @@ public class ModeMulti {
 			levelFile = new File(choosenLevel + ".txt");
 		}
 		catch(Exception ex){
-			
+			System.out.println("problème dans la lecture du fichier");
 		}
 	}
 	
@@ -103,7 +103,6 @@ public class ModeMulti {
 		
 		for(int i = 0 ; i < players.size() ; i++){
 			players.get(i).setMode("multi");
-			System.out.println(players.get(i).getMode());
 		}
 		
 		/*trapInterruptors.add(new TrapInterruptor(5, 525));
@@ -124,7 +123,6 @@ public class ModeMulti {
 				
 				if(strImg == '0'){
 					briqueIncassables.add(new BriqueIncassable(this.tailleCase*x, this.tailleCase*y));
-					//System.out.println(x + "    " + y);
 				}
 				
 				else if(strImg == '1'){
@@ -155,13 +153,20 @@ public class ModeMulti {
 			fr.close();
 			
 			
+			//new
+			entities.addAll(goals);	
+			entities.addAll(breakables);	
+			entities.addAll(trapInterruptors);
+			entities.addAll(enemies);
+			entities.addAll(briqueIncassables);
+			entities.addAll(traps);
+
 			
 			
 			
-			/*for(int j = 0 ; j < entities.size() ; j++){
+			for(int j = 0 ; j < entities.size() ; j++){
 				entities.get(j).setMode("multi");
-				System.out.println("b");
-			}*/
+			}
 		}
 		
 		catch(Exception ex){

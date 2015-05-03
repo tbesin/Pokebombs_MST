@@ -121,15 +121,16 @@ public class GameController implements KeyListener {
 		ModeMulti multi = new ModeMulti(a, "level2");
 		multi.startGame() ;
 		
-		for(int i = 0 ; i < entities.size() ; i++){
-			entities.get(i).setMode("multi");
-			//System.out.println("a");
-		}
+		entities.addAll(multi.entities);//new
 		
-		for(int i = 0 ; i < players.size() ; i++){
-			players.get(i).setMode("multi");
-			//System.out.println("b");
-		}		
+		/*for(int i = 0 ; i < entities.size() ; i++){
+			entities.get(i).setMode("multi");
+		}*/
+		
+		/*for(int i = 0 ; i < players.size() ; i++){
+			//players.get(i).setMode("multi");
+			System.out.println(players.get(i).getMode());
+		}	*/
 	}
 		
 	
@@ -168,6 +169,14 @@ public class GameController implements KeyListener {
 		
 		ModeSolo solo = new ModeSolo("levelSolo3");
 		solo.startGame() ;
+		
+		entities.addAll(solo.entities);//new
+		
+		System.out.println(entities.size());
+		
+		/*for(int i = 0 ; i < entities.size() ; i++){//new
+			entities.get(i).setMode("solo");
+		}*/
 		
 		for(int i = 0 ; i < caseTeleportation.size() ; i++){		//à déplacer
 			CaseTeleportation ct = caseTeleportation.get(i);
@@ -257,19 +266,25 @@ public class GameController implements KeyListener {
 		entities.addAll(passBomb);
 		entities.addAll(casePousseBomb);
 		
+		entities.addAll(players);//essai
+		
+		
 		for(int i = 0 ; i < entities.size() ; i++){
 			Entity ent = entities.get(i);
 			ent.update();
 		}
 		
-		for (int i=0; i<players.size();i++){
+		//essai
+		/*for (int i=0; i<players.size();i++){
 			Player tempPlayer = players.get(i);
 			if (tempPlayer.getActif())tempPlayer.update();
 			//else if (tempPlayer.getActif()==false) {tempPlayer.setX(1000*(i+1));tempPlayer.setY(1000*(i+1));tempPlayer.update();}}
-			}
+			}*/
+		
 		}
-		//checkEnd();
 	
+	
+		
 	
 	
 	

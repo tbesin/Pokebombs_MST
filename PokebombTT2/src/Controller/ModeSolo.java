@@ -11,6 +11,7 @@ import Modele.CaseTeleportation;
 import Modele.CaseUpBomb;
 import Modele.CaseUpLife;
 import Modele.Enemy;
+import Modele.Entity;
 import Modele.Goal;
 import Modele.Interrupteur;
 import Modele.Monster;
@@ -29,16 +30,17 @@ public class ModeSolo {
 		public static ArrayList<Trap> traps = GameController.getTrapList() ;
 		public static ArrayList<TrapInterruptor> trapInterruptors = GameController.getTrapInterruptorList() ;
 		public static ArrayList<Goal> goals = GameController.getGoalList() ;
-		
 		public static ArrayList<CaseUpBomb> bombCases = GameController.getCaseUpBombList() ;
 		public static ArrayList<CaseUpLife> lifeCases = GameController.getCaseUpLifeList() ;
-		
-		
 		public static ArrayList<CasePousseBomb> casePousseBomb = GameController.getCasePousseBombList() ;
 		public static ArrayList<PassBomb> passBomb = GameController.getPassBombList() ;
 		public static ArrayList<Interrupteur> interrupteur = GameController.getInterrupteurList() ;
 		public static ArrayList<Monster> monsters = GameController.getMonsterList() ;
 		public static ArrayList<CaseTeleportation> caseTeleportation = GameController.getCaseTeleportationList() ;
+		
+		public static ArrayList<Entity> entities = GameController.getEntityList() ;
+		
+		
 		
 		FileReader fr ;
 		String choosenLevel ;
@@ -67,7 +69,7 @@ public class ModeSolo {
 		
 		//méthodes
 		
-		public static ArrayList listeCoord(int nb){		//renvoit une liste de listes avec les coordonnées
+		/*public static ArrayList listeCoord(int nb){		//renvoit une liste de listes avec les coordonnées
 			ArrayList a = new ArrayList();
 			
 			for (int i =0; i<nb;i++){
@@ -79,7 +81,7 @@ public class ModeSolo {
 				}
 			}
 			return a;
-		}
+		}*/
 		
 		
 		public static void BonusSolo(int lvl, int X, int Y){
@@ -95,9 +97,9 @@ public class ModeSolo {
 		
 		public void startGame(){
 			
-			ArrayList tableau= listeCoord(15);		//tableau contenant les coordonnées
+			/*ArrayList tableau= listeCoord(15);		//tableau contenant les coordonnées
 			
-			int brique=0;
+			int brique=0;*/
 	
 			
 			/*trapInterruptors.add(new TrapInterruptor(5, 525));
@@ -118,7 +120,6 @@ public class ModeSolo {
 					
 					if(strImg == '0'){
 						briqueIncassables.add(new BriqueIncassable(this.tailleCase*x, this.tailleCase*y));
-						//System.out.println(x + "    " + y);
 					}
 					
 					else if(strImg == '1'){
@@ -220,14 +221,43 @@ public class ModeSolo {
 				//GameController.addInterrupteur(new Interrupteur(4*(200/5),1*(200/5)));
 				GameController.addCaseTeleportation(new CaseTeleportation(2*(200/5),0*(200/5)));
 				GameController.addCaseTeleportation(new CaseTeleportation(2*(200/5),4*(200/5)));
+				
+				
 				for(int i = 0 ; i < caseTeleportation.size() ; i++){
 					CaseTeleportation ct = caseTeleportation.get(i);
 					if (i%2 != 0){
 						ct.setTeleportationIn(false);
+					}
+				}
 			}
-		}
-	}
 			
-		}}
+			
+			
+			//new
+			entities.addAll(goals);	
+			entities.addAll(breakables);	
+			entities.addAll(trapInterruptors);
+			entities.addAll(enemies);
+			entities.addAll(briqueIncassables);
+			entities.addAll(traps);
+			
+			entities.addAll(bombCases);	
+			entities.addAll(lifeCases);	
+			entities.addAll(caseTeleportation);
+			entities.addAll(monsters);
+			entities.addAll(interrupteur);
+			entities.addAll(passBomb);
+			entities.addAll(casePousseBomb);
+
+			for(int j = 0 ; j < entities.size() ; j++){
+				entities.get(j).setMode("solo");
+			}
+			
+			for(int i = 0 ; i < players.size() ; i++){
+				players.get(i).setMode("solo");
+			}
+			
+		}
+}
 
 

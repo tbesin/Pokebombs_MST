@@ -24,7 +24,8 @@ public class Bomb extends Entity implements ActionListener {
 	int n=0;						//gère la différence entre les deux update
 	int canGoBomb;// le bomb peut se dŽplacer
 	int velX=0; int velY=0;
-	String mode ;
+	
+	//String mode ;		//changement cf setMode()
 	
 	
 	
@@ -34,7 +35,8 @@ public class Bomb extends Entity implements ActionListener {
 		super(x, y);
 		this.player = player ;
 		this.playerNumber = this.player.getPlayerNumber() ;
-		this.mode = this.player.getMode() ;		}
+		this.setMode(this.player.getMode()) ;		//new
+		}
 	
 	
 	// accesseur 
@@ -65,6 +67,8 @@ public class Bomb extends Entity implements ActionListener {
 	}
 	
 	public void update(){
+		checkLimite();
+		
 		checkGoBomb(this.player);//vérifie si le perso peut traverser la bombe
 		checkPousseBomb(this.player);//vérifie si le perso peut pousser la bombe
 		if (this.canGoBomb == 0) moveBomb();

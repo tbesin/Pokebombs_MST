@@ -45,12 +45,14 @@ public class Player extends Entity {
 	//MISE A JOUR DU PERSO							///
 	public void update(){		
 		
-		nearPlayer();
-		checkLimite();
-		checkLife();
-		if(canGo == 0){
-			this.setX(x + velX);			//x += velX;
-			this.setY(y + velY);			//y += velY;
+		if(this.getActif()){		//essai(marche)
+			nearPlayer();
+			checkLimite();
+			checkLife();
+			if(canGo == 0){
+				this.setX(x + velX);			//x += velX;
+				this.setY(y + velY);			//y += velY;
+			}
 		}
 	}
 	
@@ -72,7 +74,7 @@ public class Player extends Entity {
 				ic = new ImageIcon("Player1right1.png");
 			}
 			
-			if(this.speed > 2){					//pour le vélo (perte de précision avec la taille du getBounds()
+			if(this.speed > 2){	
 				if(direction == "Sud"){
 					ic = new ImageIcon("Player1velo_down1.png");
 				}
@@ -103,6 +105,68 @@ public class Player extends Entity {
 				ic = new ImageIcon("Player2right1.png");
 			}
 		}
+		
+		if(this.playerNumber == 3){							//joueur 3
+			if(direction == "Sud"){
+				ic = new ImageIcon("Player3down1.png");
+			}
+			else if(direction == "Nord"){
+				ic = new ImageIcon("Player3up1.png");
+			}
+			else if(direction == "Ouest"){
+				ic = new ImageIcon("Player3left1.png");
+			}
+			else if(direction == "Est"){
+				ic = new ImageIcon("Player3right1.png");
+			}
+			
+			if(this.speed > 2){
+				if(direction == "Sud"){
+					ic = new ImageIcon("Player3velo_down1.png");
+				}
+				else if(direction == "Nord"){
+					ic = new ImageIcon("Player3velo_up1.png");
+				}
+				else if(direction == "Ouest"){
+					ic = new ImageIcon("Player3velo_left1.png");
+				}
+				else if(direction == "Est"){
+					ic = new ImageIcon("Player3velo_right1.png");
+				}
+			}
+		}
+		
+		
+		if(this.playerNumber == 4){							//joueur 4
+			if(direction == "Sud"){
+				ic = new ImageIcon("Player4down1.png");
+			}
+			else if(direction == "Nord"){
+				ic = new ImageIcon("Player4up1.png");
+			}
+			else if(direction == "Ouest"){
+				ic = new ImageIcon("Player4left1.png");
+			}
+			else if(direction == "Est"){
+				ic = new ImageIcon("Player4right1.png");
+			}
+			
+			if(this.speed > 2){
+				if(direction == "Sud"){
+					ic = new ImageIcon("Player4velo_down1.png");
+				}
+				else if(direction == "Nord"){
+					ic = new ImageIcon("Player4velo_up1.png");
+				}
+				else if(direction == "Ouest"){
+					ic = new ImageIcon("Player4velo_left1.png");
+				}
+				else if(direction == "Est"){
+					ic = new ImageIcon("Player4velo_right1.png");
+				}
+			}
+		}
+		
 		return ic.getImage();
 	}
 	
@@ -146,7 +210,6 @@ public class Player extends Entity {
 	
 	
 	public void checkLimite(){
-		String mode = "solo";
 		if(mode =="multi"){
 			if (life>0){
 				if (x>=560) x=560;
@@ -331,7 +394,7 @@ public class Player extends Entity {
 			this.playerNumber = playerNumber;
 		}
 		
-		public int getPlayerNumber(){		//new !
+		public int getPlayerNumber(){
 			return this.playerNumber ;
 		}
 

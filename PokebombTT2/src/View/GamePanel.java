@@ -42,18 +42,20 @@ public class GamePanel extends JPanel {
 		draw(g2d , bg.getImage(), 0, 0);
 		
 		
-		//tout
+		//toutes les entités
 		for(int i = 0 ; i < entities.size() ; i++){
 			Entity cus = entities.get(i);
 			draw(g2d, cus.getImg(), cus.getX(), cus.getY() );
 		}
 		
 		
+		//plus nécessaire suite à la modification de l'update du player
+		/*
 		//les joueurs
 		for(int i = 0 ; i < players.size() ; i++ ){
 			Player tempPlayer = players.get(i);
 			g2d.drawImage(tempPlayer.getImg(), tempPlayer.getX(), tempPlayer.getY(), null) ;					//intX-10,intY-10,null);
-		}
+		}*/
 	}		
 }
 
