@@ -41,12 +41,16 @@ public abstract class Entity {
 	public void checkLimite(){
 		if(this.mode == "solo"){
 			if (x>=160) x=160;
-			if (y>=160) y=160;
+			if (y>=165) y=165;
 		}
 		
 		if(this.mode == "multi"){
-			if (x>=560){ x=560;
-			if (y>=560) y=560;
+			if (x>=560){
+				x=560;
+			}
+			
+			if (y>=560){
+				y=560; 
 			}
 		}
 		

@@ -34,7 +34,8 @@ public class Interrupteur extends Entity{
 	
 	public Rectangle getBounds(){
 		int intX = 20 ;					//(int) Math.ceil(600/15) ;
-		int intY = 20 ;			// (int) Math .ceil(600/15);
+		int intY = 30 ;			// (int) Math .ceil(600/15);
+		//return new Rectangle(x+12,y+10,intX,intY);
 		return new Rectangle(x+12,y+10,intX,intY);
 	}
 	

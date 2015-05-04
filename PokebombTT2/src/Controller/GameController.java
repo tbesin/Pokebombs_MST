@@ -16,6 +16,8 @@ import javax.swing.JOptionPane;
 
 
 
+
+
 import Modele.*;
 
 
@@ -28,6 +30,8 @@ public class GameController implements KeyListener {
 	public static int  level = 1 ;		//utilité ?
 	public static boolean bombPose = false;	//Ca doit se trouver ici ?
 	static Random rand = new Random();
+	
+	static String mode ; //new !
 	
 	
 	
@@ -80,20 +84,26 @@ public class GameController implements KeyListener {
 	}
 	
 	
+	// bonus
 	public static int choix() {
-		int n = rand.nextInt(5);
+		int n = rand.nextInt(100);
 		return n;
 	}
-		
 	
+	// Case teleportation a gŽrŽ
 	public static void Bonus(int b, int X, int Y){
-		if (b==0) GameController.addCaseUpSpeed(new CaseUpSpeed (X,Y));
-		if (b==2) GameController.addCaseUpBomb(new CaseUpBomb(X,Y));
-		if (b==1) GameController.addCaseUpLife(new CaseUpLife(X,Y));
+		if (b>=0 && b<4) GameController.addCaseUpSpeed(new CaseUpSpeed (X,Y));
+		if (b>4 && b<20) GameController.addCaseUpBomb(new CaseUpBomb(X,Y));
+		if (b>20 && b<29) GameController.addCaseUpLife(new CaseUpLife(X,Y));
+		if (b>29 && b<35) GameController.addCasePousseBomb(new CasePousseBomb(X,Y));
+		if  (b>35 && b<40) GameController.addInterrupteur(new Interrupteur(X,Y));
+		if (b>40 && b<60)  GameController.addTrap(new Trap(X,Y));
+		if (b>60 && b<70) GameController.addTrapInterruptor(new TrapInterruptor(X,Y));
+		if (b>70 && b<90) GameController.addCaseTeleportation(new CaseTeleportation(X,Y));
 	}
 	
 	
-	public void checkEnd(){  //à modifier
+/*	public void checkEnd(){  //à modifier
 		if(enemies.size() == 0){
 			level++ ;
 			enemies.clear();
@@ -101,7 +111,7 @@ public class GameController implements KeyListener {
 			JOptionPane.showMessageDialog(null, "Good work, you've completed level" + (level-1) + ". Let's move on the next one !");
 			startGame(1);	
 		}
-	}
+	}*/
 	
 	
 	
@@ -116,21 +126,14 @@ public class GameController implements KeyListener {
 	
 	
 	//mode multi
-	public static void startGame(int a){
+	public static void startGame(int a, int player1img,int player2img,int player3img,int player4img, String choosenlevel){
 		
-		ModeMulti multi = new ModeMulti(a, "level2");
+		ModeMulti multi = new ModeMulti(a, choosenlevel, player1img, player2img, player3img, player4img);
 		multi.startGame() ;
+		mode = "multi";
 		
-		entities.addAll(multi.entities);//new
 		
-		/*for(int i = 0 ; i < entities.size() ; i++){
-			entities.get(i).setMode("multi");
-		}*/
-		
-		/*for(int i = 0 ; i < players.size() ; i++){
-			//players.get(i).setMode("multi");
-			System.out.println(players.get(i).getMode());
-		}	*/
+		entities.addAll(multi.entities);
 	}
 		
 	
@@ -139,7 +142,7 @@ public class GameController implements KeyListener {
 
 	//mode solo
 
-	public static void startGameSolo(){
+	public static void startGameSolo(String choosenlevel, int playerImg){
 		/*ArrayList tableau = listeCoord(5);
 		Player player= new Player(0,0,1);
 		player.setPousseBomb(true);
@@ -167,12 +170,13 @@ public class GameController implements KeyListener {
 		addMonster(new Monster(1*(200/5),4*(200/5)));
 		addTrap(new Trap(2*(200/5),0*(200/5)));*/
 		
-		ModeSolo solo = new ModeSolo("levelSolo3");
+		ModeSolo solo = new ModeSolo(choosenlevel, playerImg);
 		solo.startGame() ;
+		mode = "solo";
 		
 		entities.addAll(solo.entities);//new
 		
-		System.out.println(entities.size());
+		//System.out.println(entities.size());
 		
 		/*for(int i = 0 ; i < entities.size() ; i++){//new
 			entities.get(i).setMode("solo");
@@ -240,7 +244,7 @@ public class GameController implements KeyListener {
 	
 //fin mode solo		
 	
-
+	
 	
 	
 	
@@ -268,24 +272,35 @@ public class GameController implements KeyListener {
 		
 		entities.addAll(players);//essai
 		
+		for(int i = 0 ; i < caseTeleportation.size() ; i++){//vérifie que les téléporteurs fonctionnent par paires
+			CaseTeleportation ct = caseTeleportation.get(i);
+			if (i%2 != 0){
+				ct.setTeleportationIn(false);
+			}
+		}
 		
 		for(int i = 0 ; i < entities.size() ; i++){
 			Entity ent = entities.get(i);
 			ent.update();
 		}
 		
-		//essai
-		/*for (int i=0; i<players.size();i++){
-			Player tempPlayer = players.get(i);
-			if (tempPlayer.getActif())tempPlayer.update();
-			//else if (tempPlayer.getActif()==false) {tempPlayer.setX(1000*(i+1));tempPlayer.setY(1000*(i+1));tempPlayer.update();}}
-			}*/
+		checkEnd();
 		
 		}
 	
 	
 		
-	
+	public void checkEnd(){		//à terminer
+		if(mode == "multi"){
+			if(players.size() == 1){
+				JOptionPane.showMessageDialog(null, "Il ne reste plus qu'un seul joueur, le jeu est terminé !" );
+				//il faut encore fermer la fenêtre	
+			}
+		}
+		
+		if (mode == "solo"){	//à compléter
+		}
+	}
 	
 	
 	
@@ -584,6 +599,33 @@ public class GameController implements KeyListener {
 		}
 		public static ArrayList<CasePousseBomb> getCasePousseBombList(){
 			return casePousseBomb;
+		}
+		
+		
+		
+		
+		//fonction pour vider toutes les listes
+		public void clearAllLists(){
+			entities.clear();	
+			
+			goals.clear();	
+			breakables.clear();	
+			trapInterruptors.clear();
+			enemies.clear();
+			bombs.clear();
+			explosions.clear();
+			briqueIncassables.clear();
+			speedCases.clear();
+			bombCases.clear();
+			missiles.clear();
+			lifeCases.clear();
+			caseTeleportation.clear();
+			interrupteur.clear();
+			monsters.clear();
+			traps.clear();
+			passBomb.clear();
+			casePousseBomb.clear();
+			players.clear();
 		}
 
 }

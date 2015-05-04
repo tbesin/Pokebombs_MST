@@ -32,6 +32,7 @@ public class Explosion extends Entity implements ActionListener {
 		super(x, y);
 		this.imgNumber = imgNumber ;
 		this.playerNumber = bomb.getPlayer().getPlayerNumber() ;
+		this.mode = bomb.getMode();
 	}
 	
 	public Explosion(int x, int y) {

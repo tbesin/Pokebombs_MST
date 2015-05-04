@@ -22,6 +22,11 @@ public class Goal extends Entity{
 		ImageIcon ic = new ImageIcon("ProfChen.png");
 		return ic.getImage();
 	 }
+	public Rectangle getBounds(){
+		int intX = 20 ;					
+		int intY = 30 ;		
+		return new Rectangle(x,y,intX,intY);
+	}
 	
 	
 	public void interact(Player p){	

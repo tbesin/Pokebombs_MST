@@ -46,14 +46,16 @@ public class ModeSolo {
 		String choosenLevel ;
 		File levelFile ;
 		
+		private static int playerimg; //Choix du sprite
+		
 		public int frameDim = 600;		//dimensions de la fenêtre (carrée)
 		public int nombreCases = 15 ;	//nombre de cases dans la fenêtre
 		public int tailleCase = frameDim/nombreCases ;	//dimensions des cases
 		
 		
 		//constructeur
-		
-		public ModeSolo( String choosenLevel){
+		public ModeSolo( String choosenLevel, int playerimg){
+			this.playerimg = playerimg;
 
 			this.choosenLevel = choosenLevel ;
 			
@@ -127,7 +129,7 @@ public class ModeSolo {
 					}
 					
 					else if(strImg == '2'){
-						players.add(new Player(x,y, 1) );
+						players.add(new Player(x,y, this.playerimg) );
 						
 						if(this.choosenLevel == "levelSolo3"){
 							players.get(0).setPousseBomb(true);
@@ -198,7 +200,7 @@ public class ModeSolo {
 				//pour test
 				
 				//ArrayList tableau = listeCoord(5);
-				players.add(new Player(0,0,1));
+				players.add(new Player(0,0,this.playerimg));
 				//players.add(new Player(2*(200/5),0));
 				//addBriqueIncassable(new BriqueIncassable (1*(200/5),0*(600/5)));
 				

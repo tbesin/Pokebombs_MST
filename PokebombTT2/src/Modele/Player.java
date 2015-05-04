@@ -20,16 +20,17 @@ public class Player extends Entity {
 	int velX= 0 , velY = 0 ;
 	int speed = 2 ;
 	int bomb =1;
-	int life = 1;
+	int life = 5;
 	int canGo ;// se dŽplacer
 	boolean playerGoBomb = false; //passer a travers les bombes
 	boolean actif = true;
 	boolean playerPoseBomb = false;// dit si le perso vient de poser une bombe
 	int playerNumber = 1 ;		//permet de déterminer l'image du joueur
 	int n=0;// ˆ rŽflechir mode solo
-	boolean pousseBomb=true;
+	boolean pousseBomb = false ;
 	boolean interrupteurUse = true;
 	boolean playerGoTrap = false;
+	boolean playerGoMonster = false;
 	String direction = "Sud" ;
 	
 	//CONSTRUCTEUR
@@ -50,8 +51,12 @@ public class Player extends Entity {
 			checkLimite();
 			checkLife();
 			if(canGo == 0){
-				this.setX(x + velX);			//x += velX;
-				this.setY(y + velY);			//y += velY;
+				this.setX(x + velX);			
+				this.setY(y + velY);
+			}
+			
+			if(this.mode == "solo" ){		//à généraliser !
+				this.pousseBomb = true ;
 			}
 		}
 	}
@@ -180,6 +185,7 @@ public class Player extends Entity {
 		ArrayList<Trap> traps = GameController.getTrapList();		//à voir avec le nouveau controleur
 		ArrayList<Entity> entities = GameController.getEntityList() ;
 		ArrayList<Interrupteur> interrupteur = GameController.getInterrupteurList();
+		ArrayList<Monster> monsters = GameController.getMonsterList();
 		for(int j = 0 ; j < entities.size(); j++){
 			Entity ent = entities.get(j) ;
 			if( this.getBounds().intersects(ent.getBounds() ) ){
@@ -192,12 +198,18 @@ public class Player extends Entity {
 				n++;
 		}
 		}
-			if (n==interrupteur.size())this.setInterrupteurUse(true);
-			for (int i = 0; i< traps.size();i++){
-				Trap tr = traps.get(i);
-				if (this.getBounds().intersects(tr.getBounds())==false){
-					this.setPlayerGoTrap(false);
-				}
+		if (n==interrupteur.size())this.setInterrupteurUse(true);
+		for (int i = 0; i< traps.size();i++){
+			Trap tr = traps.get(i);
+			if (this.getBounds().intersects(tr.getBounds())==false){
+				this.setPlayerGoTrap(false);
+			}
+		}
+		for (int i = 0; i< monsters.size();i++){
+			Monster m = monsters.get(i);
+			if (this.getBounds().intersects(m.getBounds())==false){
+				this.setPlayerGoMonster(false);
+			}
 		}
 	}
 
@@ -343,7 +355,9 @@ public class Player extends Entity {
 			public boolean getPlayerGoTrap(){
 				return this.playerGoTrap;
 			}
-			
+			public boolean getPlayerGoMonster(){
+				return this.playerGoMonster;
+			}
 			
 			
 			public void setSpeed(int newSpeed){
@@ -386,6 +400,9 @@ public class Player extends Entity {
 			}
 			public void setPlayerGoTrap(boolean bool){
 				this.playerGoTrap = bool;
+			}
+			public void setPlayerGoMonster(boolean bool){
+				this.playerGoMonster = bool;
 			}
 
 		

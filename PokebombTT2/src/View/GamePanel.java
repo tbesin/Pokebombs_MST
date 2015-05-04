@@ -15,11 +15,11 @@ import Controller.GameController;
 import Modele.*;
 
 public class GamePanel extends JPanel {
-	private JMenuBar menuBar = new JMenuBar();
+	/*private JMenuBar menuBar = new JMenuBar();
 	private JMenu menu1 = new JMenu("Fichier");
 	private JMenu menu2 = new JMenu("Aide");
 	private JMenuItem item1 = new JMenuItem("Nouvelle partie");
-	private JMenuItem item2 = new JMenuItem("Aide");
+	private JMenuItem item2 = new JMenuItem("Aide");*/
 	
 	public static ArrayList<Player> players = GameController.getPlayerList() ;
 	public static ArrayList<Entity> entities = GameController.getEntityList() ;////
@@ -47,15 +47,6 @@ public class GamePanel extends JPanel {
 			Entity cus = entities.get(i);
 			draw(g2d, cus.getImg(), cus.getX(), cus.getY() );
 		}
-		
-		
-		//plus nécessaire suite à la modification de l'update du player
-		/*
-		//les joueurs
-		for(int i = 0 ; i < players.size() ; i++ ){
-			Player tempPlayer = players.get(i);
-			g2d.drawImage(tempPlayer.getImg(), tempPlayer.getX(), tempPlayer.getY(), null) ;					//intX-10,intY-10,null);
-		}*/
 	}		
 }
 

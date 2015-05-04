@@ -58,16 +58,16 @@ public class Monster extends Entity {
 	public Image getImg(){	
 		ImageIcon ic = new ImageIcon();
 		if(directionMonster == "Sud"){
-			ic =new ImageIcon("MonsterDown.png");
+			ic =new ImageIcon("arbok_down1.png");
 		}
 		if(directionMonster == "Nord"){
-				ic = new ImageIcon("MonsterUp.png");
+				ic = new ImageIcon("arbok_up1.png");
 		}
 		if(directionMonster == "Ouest"){
-			ic = new ImageIcon("LinkRunLeft1.png");
+			ic = new ImageIcon("arbok_left1.png");
 		}
 		if(directionMonster == "Est"){
-			ic = new ImageIcon("LinkRunRight3.png");
+			ic = new ImageIcon("arbok_right1.png");
 		}
 		return ic.getImage();
 	}
@@ -138,11 +138,12 @@ public class Monster extends Entity {
 	}
 	
 	public void interact(Player p){	
-		
-		p.setLife(p.getLife() - 1);
+		if (p.getPlayerGoMonster()==false) {p.setLife(p.getLife() - 1);
 		if(mode == "solo"){
 			if (p.getLife()==1)p.setBomb(p.getBomb()+1);
 		}
+		p.setPlayerGoMonster(true);
 	}
 	
-}
+	}
+	}
