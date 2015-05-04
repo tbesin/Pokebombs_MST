@@ -21,7 +21,7 @@ import javax.swing.JOptionPane;
 import Modele.*;
 
 
-public class GameController implements KeyListener {
+public class GameController {	//implements KeyListener {
 	
 	//Timer mainTimer ;
 	
@@ -70,8 +70,8 @@ public class GameController implements KeyListener {
 		
 	}
 		
-	
-	
+
+	/*
 	//ELEMENTS A RESTRUCTURER ?
 	public static ArrayList listeCoord(int nb){
 		ArrayList a = new ArrayList();
@@ -100,7 +100,7 @@ public class GameController implements KeyListener {
 		if (b>40 && b<60)  GameController.addTrap(new Trap(X,Y));
 		if (b>60 && b<70) GameController.addTrapInterruptor(new TrapInterruptor(X,Y));
 		if (b>70 && b<90) GameController.addCaseTeleportation(new CaseTeleportation(X,Y));
-	}
+	}*/
 	
 	
 /*	public void checkEnd(){  //à modifier
@@ -119,7 +119,7 @@ public class GameController implements KeyListener {
 	
 	
 	
-	
+	/*
 
 	//DEMARRAGE DU JEU		==> reste à gérer la fin
 	
@@ -142,7 +142,7 @@ public class GameController implements KeyListener {
 
 	//mode solo
 
-	public static void startGameSolo(String choosenlevel, int playerImg){
+	public static void startGameSolo(String choosenlevel, int playerImg){*/
 		/*ArrayList tableau = listeCoord(5);
 		Player player= new Player(0,0,1);
 		player.setPousseBomb(true);
@@ -170,19 +170,19 @@ public class GameController implements KeyListener {
 		addMonster(new Monster(1*(200/5),4*(200/5)));
 		addTrap(new Trap(2*(200/5),0*(200/5)));*/
 		
-		ModeSolo solo = new ModeSolo(choosenlevel, playerImg);
+		/*ModeSolo solo = new ModeSolo(choosenlevel, playerImg);
 		solo.startGame() ;
 		mode = "solo";
 		
 		entities.addAll(solo.entities);//new
 		
-		//System.out.println(entities.size());
+		//System.out.println(entities.size());*/
 		
 		/*for(int i = 0 ; i < entities.size() ; i++){//new
 			entities.get(i).setMode("solo");
 		}*/
 		
-		for(int i = 0 ; i < caseTeleportation.size() ; i++){		//à déplacer
+		/*for(int i = 0 ; i < caseTeleportation.size() ; i++){		//à déplacer
 			CaseTeleportation ct = caseTeleportation.get(i);
 			if (i%2 != 0) ct.setTeleportationIn(false);
 		}
@@ -369,8 +369,7 @@ public class GameController implements KeyListener {
 		
 	}
 	
-	
-	
+	*/
 	
 	
 	

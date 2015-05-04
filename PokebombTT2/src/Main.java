@@ -18,7 +18,5 @@ public class Main {
 		//éditeur
 		//EditorFrame efr = new EditorFrame() ;
 	}
-	
-	//hello c'est TT
 
 }

@@ -13,6 +13,7 @@ import javax.swing.JOptionPane;
 import javax.swing.Timer;
 
 import Controller.GameController;
+import Controller.GameManager;
 
 
 public class Explosion extends Entity implements ActionListener {
@@ -90,6 +91,26 @@ public class Explosion extends Entity implements ActionListener {
 				}
 			}
 			
+			if(this.playerNumber == 3){
+				if(this.imgNumber == 2){
+					ic = new ImageIcon("carapuce_bombe1.png");
+				}
+				
+				else {
+					ic = new ImageIcon("bubble_attack1.png");
+				}
+			}
+			
+			if(this.playerNumber == 4){
+				if(this.imgNumber == 2){
+					ic = new ImageIcon("bulbizarre_bombe1.png");
+				}
+				
+				else {
+					ic = new ImageIcon("leaf_attack1.png");
+				}
+			}
+			
 			return ic.getImage();
 		}
 	
@@ -106,10 +127,10 @@ public class Explosion extends Entity implements ActionListener {
 				this.setExplosionActif(false);
 				GameController.removeBreakable(tempEnemy);
 				if(mode == "solo"){
-					GameController.BonusSolo(lvl, tempEnemy.getX(), tempEnemy.getY());
+					GameManager.BonusSolo(lvl, tempEnemy.getX(), tempEnemy.getY());
 				}
 				if(mode == "multi"){
-					GameController.Bonus(GameController.choix(),tempEnemy.getX(),tempEnemy.getY());
+					GameManager.Bonus(GameManager.choix(),tempEnemy.getX(),tempEnemy.getY());
 				}
 			}
 			
@@ -158,7 +179,7 @@ public class Explosion extends Entity implements ActionListener {
 			if( getBounds().intersects(t.getBounds() )&& this.getExplosionActif() ) {
 				this.setExplosionActif(false);
 				GameController.removeInterrupteur(t);
-				GameController.BonusSolo(lvl, t.getX(), t.getY());
+				GameManager.BonusSolo(lvl, t.getX(), t.getY());
 				if(lvl != 0){t.explode();}
 			}
 	}

@@ -23,7 +23,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 
-import Controller.GameController;
+import Controller.GameManager;
 import Controller.ModeMulti;
 import Controller.ModeSolo;
 
@@ -31,11 +31,13 @@ import Controller.ModeSolo;
 public class GameView extends JFrame implements ActionListener{
 	
 	Timer mainTimer ;							
-	GameController controller ;
+	
 	GamePanel pan ;
 	BarreInfo barreinfo;
 	BarreInfoSolo barreinfosolo;
 	String mode;
+	
+	GameManager manager ; //new !
 	
 	//barre d'outils
 	private JMenuBar menuBar = new JMenuBar();
@@ -111,6 +113,7 @@ public class GameView extends JFrame implements ActionListener{
 		InitMenu();
 		InitToolbar();	
 	}
+	
 	//Setter, permettent de choisir le niveau, le sprite et le nbre de joueurs
 	public static void setplayerimg(int a){
 		playerimg = a;
@@ -155,22 +158,26 @@ public class GameView extends JFrame implements ActionListener{
     	});
 		this.setJMenuBar(menuBar);	
 	}
+	
 	//change la barre d'outil lors d'une nouvelle partie
 	public void changetoolbar(String mode){
 		this.menu1.add(item3);
 		if(mode=="solo"){
 			item3.addActionListener(new ActionListener(){
 	    	public void actionPerformed(ActionEvent ar0){
-	            controller= new GameController();}	
+	            manager = new GameManager(); //new !		A quoi ça sert ent fait ?
+	    	}	
 	    	});
 			}
 		if (mode=="multi"){
 			item3.addActionListener(new ActionListener(){
 		    	public void actionPerformed(ActionEvent ar0){
-		            controller= new GameController();}	
+		            manager = new GameManager(); //new !	Pourquoi mettre ça ici ?
+		    	}	
 		    	});
 		}
 	}
+	
 	//initie le menu principal
 	public void InitMenu(){	
 		this.setSize(600,600);
@@ -210,6 +217,8 @@ public class GameView extends JFrame implements ActionListener{
 			
 			setLayout(new BorderLayout());
 			this.add(ok,BorderLayout.SOUTH);
+			
+			//choix du niveau en solo
 			this.lvl1solo.addActionListener(new ActionListener(){
 				public void actionPerformed(ActionEvent event){
 					GameView.setchosenlevelsolo("levelsolo1");
@@ -235,6 +244,8 @@ public class GameView extends JFrame implements ActionListener{
 					   GameView.setchosenlevelsolo("levelsolo3");
 				   }
 			 });
+			
+			//choix du perso en solo
 			this.player1.addActionListener(new ActionListener(){
 				   public void actionPerformed(ActionEvent event){
 					   GameView.setplayerimg(1);
@@ -255,6 +266,8 @@ public class GameView extends JFrame implements ActionListener{
 					   GameView.setplayerimg(4);
 				   }
 			 });
+			
+			//clic sur le bouton ok
 			this.ok.addActionListener(new ActionListener(){
 				   public void actionPerformed(ActionEvent event){
 					   Gamelaunch("solo"); 
@@ -289,6 +302,8 @@ public class GameView extends JFrame implements ActionListener{
 			this.add(lvl5multi);
 			setLayout(new BorderLayout());
 			this.add(ok,BorderLayout.SOUTH);
+			
+			//choix du nombre de joueurs en multi
 			this.p2.addActionListener(new ActionListener(){
 				   public void actionPerformed(ActionEvent event){
 					   GameView.setnbplayer(2);
@@ -307,6 +322,8 @@ public class GameView extends JFrame implements ActionListener{
 					   menupage1.setVisible(false);
 				   }
 				 });
+			
+			//choix du niveau en multi
 			this.lvl1multi.addActionListener(new ActionListener(){
 				   public void actionPerformed(ActionEvent event){
 					   GameView.setchosenlevelmulti("levelMulti1");
@@ -332,6 +349,8 @@ public class GameView extends JFrame implements ActionListener{
 					   GameView.setchosenlevelmulti("levelMulti5");
 				   }
 			 });
+			
+			//clic sur le bouton ok
 			this.ok.addActionListener(new ActionListener(){
 				   public void actionPerformed(ActionEvent event){
 					   //ModeSolo.startGame(playerimg,chosenlevel);
@@ -347,6 +366,9 @@ public class GameView extends JFrame implements ActionListener{
 				   }
 			 });
 		}
+		
+		
+		//permet le choix du joueur en multi
 		private void gamemenumultipage2launch(int nbplayer) {
 			setLayout(null);
 			if (nbplayer==2){
@@ -371,7 +393,7 @@ public class GameView extends JFrame implements ActionListener{
 				this.add(player1_3);
 				this.add(player2_3);
 				this.add(player3_3);
-				this.add(player1_3);
+				this.add(player4_3);
 			}
 			else if (nbplayer==4){
 				this.add(player1_1);
@@ -503,15 +525,18 @@ public class GameView extends JFrame implements ActionListener{
 		}
 		public void Gamelaunch(String mode){
 			
-			changetoolbar("mode");
+			this.manager = new GameManager();
+			
+			
+			changetoolbar("mode");		//normal que ce soit "mode" et pas mode ?
 			if (mode=="multi"){
 			
-			GameController.startGame( this.nbplayer,  player1img, player2img, player3img, player4img, this.chosenlevelmulti);
+			this.manager.startGame( this.nbplayer,  player1img, player2img, player3img, player4img, this.chosenlevelmulti);
 			this.setSize(840,650);
 			this.setTitle("Bombermon !!!");
 			this.setFocusable(true);
-			this.controller = new GameController() ;
-			addKeyListener(controller);	
+		
+			addKeyListener(manager);	
 			getContentPane().setLayout(null);
 			this.barreinfo = new BarreInfo();
 			getContentPane().add(barreinfo);
@@ -529,12 +554,12 @@ public class GameView extends JFrame implements ActionListener{
 			
 			
 			if (mode=="solo"){
-			GameController.startGameSolo(chosenlevelsolo, playerimg);
+			this.manager.startGameSolo(chosenlevelsolo, playerimg);
 			this.setTitle("Pokebombs !!!");	
 			this.setSize(430,250);
-			this.controller = new GameController() ;
+		
 			this.setFocusable(true);
-			addKeyListener(controller);
+			addKeyListener(manager);
 			this.barreinfosolo = new BarreInfoSolo();
 			Dimension size2 = barreinfosolo.getPreferredSize();
 			barreinfosolo.setBounds(220,0,size2.width, size2.height);
@@ -552,7 +577,7 @@ public class GameView extends JFrame implements ActionListener{
 			
 		}
 	public void actionPerformed(ActionEvent e) {		//� terminer
-		controller.update() ; 			//� modifier
+		manager.update() ; 			//� modifier
 		repaint() ;
 		
 	}
