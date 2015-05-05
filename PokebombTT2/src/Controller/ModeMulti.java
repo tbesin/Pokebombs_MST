@@ -75,7 +75,7 @@ public class ModeMulti {
 	static Random rand = new Random();
 	public static ArrayList tableauEnemies = new ArrayList();		//what ?
 	public static ArrayList tableauBriqueIncassable = new ArrayList();
-	static int breakableCount = 5;		//utilité ?
+	//static int breakableCount = 5;		//utilité ?
 	
 	//Choix du Sprite
 	private static int player1img;
@@ -239,11 +239,11 @@ public class ModeMulti {
 		}
 		
 		catch(Exception ex){
-			//System.out.println("problème..." + ex);
 			
 			
 			ArrayList tableau= listeCoord(15);
 			int brique=0;
+			int breakableCount = 5 ; //Pourquoi 5 ?
 			
 			while (brique<49){
 				int n = rand.nextInt(tableau.size());

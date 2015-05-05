@@ -67,7 +67,7 @@ public class GameController {	//implements KeyListener {
 	
 	//constructeur va changer par la suite
 	public GameController(){						
-		
+		this.clearAllLists();
 	}
 		
 

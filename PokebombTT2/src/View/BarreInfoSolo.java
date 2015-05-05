@@ -18,8 +18,12 @@ import Modele.CaseUpBomb;
 import Modele.CaseUpLife;
 
 public class BarreInfoSolo extends JPanel{
+	
 	public BarreInfoSolo(){
 	}
+	
+	GameController controller = GameView.getGameController();
+	
 	public void paint(Graphics g){
 		   try {
 			      //Image img = ImageIO.read(new File("ALLO.jpg"));
@@ -32,26 +36,23 @@ public class BarreInfoSolo extends JPanel{
 		   g.setFont(font);
 		   g.setColor(Color.black);          
 		 //g.drawString((String), 10, 20);
-		   for (int i =0; i<GameController.getPlayerList().size();i++){
-			   if (GameController.getPlayerList().get(i).getPousseBomb()){
+		 if (controller.getPlayerList().get(0).getPousseBomb()){
 				   ImageIcon ic = new ImageIcon("casePousseBomb.png");
-			   		g.drawImage(ic.getImage(),20, 60+30*i , 30, 30, this);
+			   		g.drawImage(ic.getImage(),20, 120 , 30, 30, this);
 			  }
-		   }
+
 		  
-		   for (int i =0; i<GameController.getPlayerList().size();i++){
-			   for (int j = 0 ; j< GameController.getPlayerList().get(i).getLife(); j++){
+			   for (int j = 0 ; j< controller.getPlayerList().get(0).getLife(); j++){
 				   ImageIcon ic = new ImageIcon("baieVie1.png");
-				   g.drawImage(ic.getImage(),20+30*j, 60+30*i , 30, 30, this);
+				   g.drawImage(ic.getImage(),20+30*j, 60 , 30, 30, this);
 			   }
-			   for (int j = 0 ; j< GameController.getPlayerList().get(i).getBomb(); j++){
+			   for (int j = 0 ; j< controller.getPlayerList().get(0).getBomb(); j++){
 				   ImageIcon ic = new ImageIcon("pokeball.png");
-				   g.drawImage(ic.getImage(),50+30*j, 60+30*i , 30, 30, this);
-			   g.drawString(""+GameController.getPlayerList().get(i).getSpeed(), 20+30*i, 330);			   
+				   g.drawImage(ic.getImage(),20+30*j, 90 , 30, 30, this);
+				   g.drawString("Speed: "+controller.getPlayerList().get(0).getSpeed(), 25, 163);			   
 		   
 		   }
 
 	}
 	}
-}
 
