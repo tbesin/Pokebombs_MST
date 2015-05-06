@@ -43,6 +43,9 @@ public class GameView extends JFrame implements ActionListener{
 	private static Boolean premierTour1 = true ;	//cheat pour les nouvelles parties !!!
 	private static Boolean premierTour2 = true ;
 	
+	
+	
+	
 	static GameManager manager ; //new !
 	
 	//barre d'outils
@@ -70,6 +73,10 @@ public class GameView extends JFrame implements ActionListener{
 	public static Bouton lvl4multi = new Bouton("","lvl4solo.jpg",320,260,50,50);
 	public static Bouton lvl5multi = new Bouton("","lvl5solo.jpg",380,260,50,50);
 	
+	
+	final JLabel levelmulti = new JLabel("Niveau choisi : ");		
+	final JLabel nbreplayer= new JLabel("Nombre choisi : ");
+	
 	//pour choisir le nbre de joueurs et le niveau
 	static int nbplayer;
 	static String chosenlevelmulti;
@@ -93,6 +100,11 @@ public class GameView extends JFrame implements ActionListener{
 	private Bouton player3_4 = new Bouton("","player3down1.png",260,400,50,50);
 	private Bouton player4_4 = new Bouton("","player4down1.png",320,400,50,50);
 	
+	final JLabel player1multi = new JLabel("Joueur choisi : ");
+	final JLabel player2multi = new JLabel("Joueur choisi : ");
+	final JLabel player3multi = new JLabel("Joueur choisi : ");
+	final JLabel player4multi = new JLabel("Joueur choisi : ");
+	
 	//Pour Choisir son Sprite
 	static int player1img;
 	static int player2img;
@@ -111,6 +123,9 @@ public class GameView extends JFrame implements ActionListener{
 	private Bouton player2 = new Bouton("","Player2down1.png",230,400,50,50);
 	private Bouton player3 = new Bouton("","player3down1.png",290,400,50,50);
 	private Bouton player4 = new Bouton("","player4down1.png",350,400,50,50);
+	
+	final JLabel levelsolo = new JLabel("Niveau choisi : ");
+	final JLabel playersolo = new JLabel("Joueur choisi : ");
 	
 	
 	
@@ -268,8 +283,7 @@ public class GameView extends JFrame implements ActionListener{
 			this.add(player4);	
 			
 			//affichage du choix
-			final JLabel levelsolo = new JLabel("Niveau choisi : ");
-			final JLabel playersolo = new JLabel("Joueur choisi : ");
+			
 			levelsolo.setBounds(240, 160, 200, 20);	
 			this.add(levelsolo);
 			this.add(playersolo);
@@ -285,50 +299,55 @@ public class GameView extends JFrame implements ActionListener{
 			this.lvl1solo.addActionListener(new ActionListener(){
 				public void actionPerformed(ActionEvent event){
 					GameView.setchosenlevelsolo("levelsolo1");
+					levelsolo.setText("Niveau choisi : 1");
 				   }
 			 });
 			this.lvl2solo.addActionListener(new ActionListener(){
 				   public void actionPerformed(ActionEvent event){
 					GameView.setchosenlevelsolo("levelsolo2");
+					levelsolo.setText("Niveau choisi : 2");
 				   }
 			 });
 			this.lvl3solo.addActionListener(new ActionListener(){
 				   public void actionPerformed(ActionEvent event){
 					   GameView.setchosenlevelsolo("levelsolo3");
+					   levelsolo.setText("Niveau choisi : 3");
 				   }
 			 });
 			this.lvl4solo.addActionListener(new ActionListener(){
 				   public void actionPerformed(ActionEvent event){
 					   GameView.setchosenlevelsolo("levelsolo3");
+					   levelsolo.setText("Niveau choisi : 4");
 				   }
 			 });
 			this.lvl5solo.addActionListener(new ActionListener(){
 				   public void actionPerformed(ActionEvent event){
 					   GameView.setchosenlevelsolo("levelsolo3");
+					   levelsolo.setText("Niveau choisi : 5");
 				   }
 			 });
-			
-			
-			
-			//choix du perso en solo
 			this.player1.addActionListener(new ActionListener(){
 				   public void actionPerformed(ActionEvent event){
 					   GameView.setplayerimg(1);
+					   playersolo.setText("Joueur choisi : 1");
 				   }
 			 });
 			this.player2.addActionListener(new ActionListener(){
 				   public void actionPerformed(ActionEvent event){
 					   GameView.setplayerimg(2);
+					   playersolo.setText("Joueur choisi : 2");
 				   }
 			 });
 			this.player3.addActionListener(new ActionListener(){
 				   public void actionPerformed(ActionEvent event){
 					   GameView.setplayerimg(3);
+					   playersolo.setText("Joueur choisi : 3");
 				   }
 			 });
 			this.player4.addActionListener(new ActionListener(){
 				   public void actionPerformed(ActionEvent event){
 					   GameView.setplayerimg(4);
+					   playersolo.setText("Joueur choisi : 4");
 				   }
 			 });
 			
@@ -376,6 +395,14 @@ public class GameView extends JFrame implements ActionListener{
 			this.add(lvl3multi);
 			this.add(lvl4multi);
 			this.add(lvl5multi);
+			
+			//affichage des choix
+			
+			levelmulti.setBounds(240, 320, 200, 20);
+			nbreplayer.setBounds(240, 180, 200, 100);
+			this.add(levelmulti);
+			this.add(nbreplayer);
+			
 			setLayout(new BorderLayout());
 			this.add(ok,BorderLayout.SOUTH);	
 			bouton("multi1", 0, true);//cheat
@@ -384,48 +411,51 @@ public class GameView extends JFrame implements ActionListener{
 			this.p2.addActionListener(new ActionListener(){
 				   public void actionPerformed(ActionEvent event){
 					   GameView.setnbplayer(2);
-					   menupage1.setVisible(false);
+					   nbreplayer.setText("Nombre choisi : 2");
 				   }
 				 });
 			this.p3.addActionListener(new ActionListener(){
 				   public void actionPerformed(ActionEvent event){
 					   GameView.setnbplayer(3);
-					   menupage1.setVisible(false);
+					   nbreplayer.setText("Nombre choisi : 3");
 				   }
 				 });
 			this.p4.addActionListener(new ActionListener(){
 				   public void actionPerformed(ActionEvent event){
 					   GameView.setnbplayer(4);
-					   menupage1.setVisible(false);
+					   nbreplayer.setText("Nombre choisi : 4");
 				   }
 				 });
-			
-			//choix du niveau en multi
 			this.lvl1multi.addActionListener(new ActionListener(){
 				   public void actionPerformed(ActionEvent event){
 					   GameView.setchosenlevelmulti("levelMulti1");
+					   levelmulti.setText("Niveau choisi : 1");
 				   }
 			 });
 			this.lvl2multi.addActionListener(new ActionListener(){
 				   public void actionPerformed(ActionEvent event){
 					   GameView.setchosenlevelmulti("levelMulti2");
+					   levelmulti.setText("Niveau choisi : 2");
 				   }
 			 });
 			this.lvl3multi.addActionListener(new ActionListener(){
 				   public void actionPerformed(ActionEvent event){
 					   GameView.setchosenlevelmulti("levelMulti3");
+					   levelmulti.setText("Niveau choisi : 3");
 				   }
 			 });
 			this.lvl4multi.addActionListener(new ActionListener(){
 				   public void actionPerformed(ActionEvent event){
 					   GameView.setchosenlevelmulti("levelMulti4");
+					   levelmulti.setText("Niveau choisi : 4");
 				   }
 			 });
 			this.lvl5multi.addActionListener(new ActionListener(){
 				   public void actionPerformed(ActionEvent event){
 					   GameView.setchosenlevelmulti("levelMulti5");
+					   levelmulti.setText("Niveau choisi : 5");
 				   }
-			 });		
+			 });
 			//clic sur le bouton ok (le premier en multi)
 			this.ok.addActionListener(new ActionListener(){
 				   public void actionPerformed(ActionEvent event){
@@ -449,6 +479,11 @@ public class GameView extends JFrame implements ActionListener{
 		//permet le choix du joueur en multi
 		private void gamemenumultipage2launch(int nbplayer) {
 			
+			player1multi.setBounds(240, 160, 200, 20);
+			player2multi.setBounds(240, 260, 200, 20);
+			player3multi.setBounds(240, 360, 200, 20);
+			player4multi.setBounds(240, 460, 200, 20);
+			
 			setLayout(null);
 			if (nbplayer==2){
 				this.add(player1_1);
@@ -459,6 +494,8 @@ public class GameView extends JFrame implements ActionListener{
 				this.add(player2_2);
 				this.add(player3_2);
 				this.add(player4_2);
+				this.add(player1multi);
+				this.add(player2multi);
 				
 				//bouton("menu2", 2, true);//cheat
 			}			
@@ -475,6 +512,9 @@ public class GameView extends JFrame implements ActionListener{
 				this.add(player2_3);
 				this.add(player3_3);
 				this.add(player4_3);
+				this.add(player1multi);
+				this.add(player2multi);
+				this.add(player3multi);
 				
 			}
 			else if (nbplayer==4){
@@ -494,9 +534,14 @@ public class GameView extends JFrame implements ActionListener{
 				this.add(player2_4);
 				this.add(player3_4);
 				this.add(player4_4);
+				this.add(player1multi);
+				this.add(player2multi);
+				this.add(player3multi);
+				this.add(player4multi);
 				
 				//bouton("multi2", 4, true);//cheat
 			}
+			
 			setLayout(new BorderLayout());
 			this.add(ok2,BorderLayout.SOUTH);
 			//ok.setVisible(true);
@@ -505,82 +550,97 @@ public class GameView extends JFrame implements ActionListener{
 			this.player1_1.addActionListener(new ActionListener(){
 				   public void actionPerformed(ActionEvent event){
 						GameView.setplayer1img(1);
+						player1multi.setText("Joueur choisi : 1");
 				   }
 			 });
 			this.player2_1.addActionListener(new ActionListener(){
 				   public void actionPerformed(ActionEvent event){
 					   GameView.setplayer1img(2);
+					   player1multi.setText("Joueur choisi : 2");
 				   }
 			 });
 			this.player3_1.addActionListener(new ActionListener(){
 				   public void actionPerformed(ActionEvent event){
 					   GameView.setplayer1img(3);
+					   player1multi.setText("Joueur choisi : 3");
 				   }
 			 });
 			this.player4_1.addActionListener(new ActionListener(){
 				   public void actionPerformed(ActionEvent event){
 					   GameView.setplayer1img(4);
+					   player1multi.setText("Joueur choisi : 4");
 				   }
 			 });
 			this.player1_2.addActionListener(new ActionListener(){
 				   public void actionPerformed(ActionEvent event){
 					   GameView.setplayer2img(1);
+					   player2multi.setText("Joueur choisi : 1");
 				   }
 			 });
 	
 			this.player2_2.addActionListener(new ActionListener(){
 				   public void actionPerformed(ActionEvent event){
 					   GameView.setplayer2img(2);
+					   player2multi.setText("Joueur choisi : 2");
 				   }
 			 });
 			this.player3_2.addActionListener(new ActionListener(){
 				   public void actionPerformed(ActionEvent event){
 					   GameView.setplayer2img(3);
-				   }
+					   player2multi.setText("Joueur choisi : 3");   }
 			 });
 			this.player4_2.addActionListener(new ActionListener(){
 				   public void actionPerformed(ActionEvent event){
 					   GameView.setplayer2img(4);
+					   player2multi.setText("Joueur choisi : 4");
 				   }
 			 });
 			this.player1_3.addActionListener(new ActionListener(){
 				   public void actionPerformed(ActionEvent event){
 					   GameView.setplayer3img(1);
+					   player3multi.setText("Joueur choisi : 1");
 				   }
 			 });
 			this.player2_3.addActionListener(new ActionListener(){
 				   public void actionPerformed(ActionEvent event){
 					   GameView.setplayer3img(2);
+					   player3multi.setText("Joueur choisi : 2");
 				   }
 			 });
 			this.player3_3.addActionListener(new ActionListener(){
 				   public void actionPerformed(ActionEvent event){
 					   GameView.setplayer3img(3);
+					   player3multi.setText("Joueur choisi : 3");
 				   }
 			 });
 			this.player4_3.addActionListener(new ActionListener(){
 				   public void actionPerformed(ActionEvent event){
 					   GameView.setplayer3img(4);
+					   player3multi.setText("Joueur choisi : 4");
 				   }
 			 });
 			this.player1_4.addActionListener(new ActionListener(){
 				   public void actionPerformed(ActionEvent event){
 					   GameView.setplayer4img(1);
+					   player4multi.setText("Joueur choisi : 1");
 				   }
 			 });
 			this.player2_4.addActionListener(new ActionListener(){
 				   public void actionPerformed(ActionEvent event){
 					   GameView.setplayer4img(2);
+					   player4multi.setText("Joueur choisi : 2");
 				   }
 			 });
 			this.player3_4.addActionListener(new ActionListener(){
 				   public void actionPerformed(ActionEvent event){
 					   GameView.setplayer4img(3);
+					   player4multi.setText("Joueur choisi : 3");
 				   }
 			 });
 			this.player4_4.addActionListener(new ActionListener(){
 				   public void actionPerformed(ActionEvent event){
 					   GameView.setplayer4img(4);
+					   player4multi.setText("Joueur choisi : 4");
 				   }
 			 });
 			
@@ -713,9 +773,19 @@ public class GameView extends JFrame implements ActionListener{
 			 lvl3multi.setVisible(bool);
 			 lvl4multi.setVisible(bool);
 			 lvl5multi.setVisible(bool);
+			 
+			levelmulti.setVisible(bool);
+			nbreplayer.setVisible(bool);
+			 
 			 ok.setVisible(bool);
 		}
 		else if (page == "multi2"){
+			
+			 player1multi.setVisible(bool);
+			 player2multi.setVisible(bool);
+			 player3multi.setVisible(bool);
+			 player4multi.setVisible(bool);
+			
 			ok2.setVisible(bool);
 			if (nbplayers==2){
 			 player1_1.setVisible(bool);
@@ -773,6 +843,9 @@ public class GameView extends JFrame implements ActionListener{
 			player2.setVisible(bool);
 			player3.setVisible(bool);
 			player4.setVisible(bool);
+			
+			levelsolo.setVisible(bool);
+			playersolo.setVisible(bool);
 		}
 	}
 
