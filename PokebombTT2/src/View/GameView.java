@@ -36,9 +36,12 @@ public class GameView extends JFrame implements ActionListener{
 	GamePanel pan  = new GamePanel() ;
 	BarreInfo barreinfo;
 	BarreInfoSolo barreinfosolo;
-	String mode;
+	String mode;		
 	
 	
+	
+	private static Boolean premierTour1 = true ;	//cheat pour les nouvelles parties !!!
+	private static Boolean premierTour2 = true ;
 	
 	static GameManager manager ; //new !
 	
@@ -108,6 +111,9 @@ public class GameView extends JFrame implements ActionListener{
 	private Bouton player2 = new Bouton("","Player2down1.png",230,400,50,50);
 	private Bouton player3 = new Bouton("","player3down1.png",290,400,50,50);
 	private Bouton player4 = new Bouton("","player4down1.png",350,400,50,50);
+	
+	
+	
 	//pour choisir son niveau et son sprite
 	static String chosenlevelsolo; 
 	private static int playerimg;
@@ -152,11 +158,14 @@ public class GameView extends JFrame implements ActionListener{
 	public void InitToolbar(){
 		this.menu1.add(item1);
 		this.menuBar.add(menu1);
-		item1.addActionListener(new ActionListener(){
+		
+		item1.addActionListener(new ActionListener(){	//permet le retour au menu principale par la case fichier
     	public void actionPerformed(ActionEvent ar0){ 
     		pan.setVisible(false);    		
-    		mainTimer.stop();							///Pour Siméon
+    		mainTimer.stop();							///Pour Siméon 
+        	
         	InitMenu();  		    		
+        	
            // manager = new GameManager(); //new !
     		
     	}
@@ -171,18 +180,15 @@ public class GameView extends JFrame implements ActionListener{
 		this.menu1.add(item3);
 		
 		if(mode=="solo"){
-			item3.addActionListener(new ActionListener(){
+			item3.addActionListener(new ActionListener(){	//nouvelle partie en mode solo
 	    	public void actionPerformed(ActionEvent ar0){
-	    		 
 	    		mainTimer.stop();
 	    		
-	         //   manager = new GameManager(); //new !		A quoi ça sert ent fait ?
-	           
 	            Gamelaunch("solo");
 	    	}	
 	    	});
 		
-			item2.addActionListener(new ActionListener(){
+			item2.addActionListener(new ActionListener(){		//aide en mode solo
 				public void actionPerformed(ActionEvent ar0){
 					Help zd = new Help(null,"Aide",true,"Aidesolo.png");
 				}
@@ -191,18 +197,15 @@ public class GameView extends JFrame implements ActionListener{
 		}	
 		
 		if (mode=="multi"){
-			item2.addActionListener(new ActionListener(){
+			item2.addActionListener(new ActionListener(){		//aide en mode multi
 				public void actionPerformed(ActionEvent ar0){
 					Help zd = new Help(null,"Aide",true,"Aidemulti.png");
 				}
 			});
 			
-			item3.addActionListener(new ActionListener(){
+			item3.addActionListener(new ActionListener(){	//nouvelle partie en mode multi
 		    	public void actionPerformed(ActionEvent ar0){
-		    		
 		    		mainTimer.stop();
-		    		
-		           // manager = new GameManager(); //new !	Pourquoi mettre ça ici ?
 		            
 		            Gamelaunch("multi");
 		    	}	
@@ -217,27 +220,36 @@ public class GameView extends JFrame implements ActionListener{
 		this.setSize(600,600);
 		this.add(bsolo);
 		this.add(bmulti);
-		bouton("menuprincipal", 0, true);//cheat
+		
+		bouton("menuprincipal", 0, true);//cheat pour rendre (in)visible les boutons
+		
 		this.menupage1 = new Menu("menu2.png",600,600,0,0);
 		getContentPane().add(menupage1) ;
-		this.bmulti.addActionListener(new ActionListener(){
+		
+
+		this.bmulti.addActionListener(new ActionListener(){			//sélection du mode multi
 			   public void actionPerformed(ActionEvent event){
+				   
 				   MenuMultipage1Launch();
+				   
 				   menupage1.setVisible(false);
 				   bouton("menuprincipal", 0, false);//cheat
 				  /* bmulti.setVisible(false);
 				   bsolo.setVisible(false);*/
 			   }
 			 });
-		this.bsolo.addActionListener(new ActionListener(){
-			   public void actionPerformed(ActionEvent event){
+		this.bsolo.addActionListener(new ActionListener(){			//sélection du mode solo
+			   public void actionPerformed(ActionEvent event){	
+
 				   MenuSoloLaunch();
+				   
 				   menupage1.setVisible(false);
 				   bouton("menuprincipal", 0, false);//cheat
 				  /* bsolo.setVisible(false);
 				   bmulti.setVisible(false);*/
 			   }
 			 });
+		
 	}
 	
 	
@@ -253,7 +265,15 @@ public class GameView extends JFrame implements ActionListener{
 			this.add(player1);
 			this.add(player2);
 			this.add(player3);
-			this.add(player4);		
+			this.add(player4);	
+			
+			//affichage du choix
+			final JLabel levelsolo = new JLabel("Niveau choisi : ");
+			final JLabel playersolo = new JLabel("Joueur choisi : ");
+			levelsolo.setBounds(240, 160, 200, 20);	
+			this.add(levelsolo);
+			this.add(playersolo);
+			playersolo.setBounds(240, 450, 200, 20);
 			
 			setLayout(new BorderLayout());
 			this.add(ok3,BorderLayout.SOUTH);
@@ -288,6 +308,8 @@ public class GameView extends JFrame implements ActionListener{
 				   }
 			 });
 			
+			
+			
 			//choix du perso en solo
 			this.player1.addActionListener(new ActionListener(){
 				   public void actionPerformed(ActionEvent event){
@@ -310,25 +332,31 @@ public class GameView extends JFrame implements ActionListener{
 				   }
 			 });
 			
-			//clic sur le bouton ok
-			this.ok3.addActionListener(new ActionListener(){
-				   public void actionPerformed(ActionEvent event){
-					   Gamelaunch("solo"); 
-					  /* player1.setVisible(false);
-					   player2.setVisible(false);
-					   player3.setVisible(false);
-					   player4.setVisible(false);
-					   ok.setVisible(false);
-					   lvl1solo.setVisible(false);
-					   lvl2solo.setVisible(false);
-					   lvl3solo.setVisible(false);
-					   lvl4solo.setVisible(false);
-					   lvl5solo.setVisible(false);*/
-					   
-					   bouton("solo", 0, false);//cheat
-					  
-				   }
-			 });
+			
+			if(premierTour1 == true){	//cette condition évite de créer plusieurs listener pour le même bouton !
+				//clic sur le bouton ok en mode solo
+				this.ok3.addActionListener(new ActionListener(){
+					   public void actionPerformed(ActionEvent event){
+						   Gamelaunch("solo"); 
+						  /* player1.setVisible(false);
+						   player2.setVisible(false);
+						   player3.setVisible(false);
+						   player4.setVisible(false);
+						   ok.setVisible(false);
+						   lvl1solo.setVisible(false);
+						   lvl2solo.setVisible(false);
+						   lvl3solo.setVisible(false);
+						   lvl4solo.setVisible(false);
+						   lvl5solo.setVisible(false);*/
+						   
+						   bouton("solo", 0, false);//cheat
+						   
+						   premierTour1 = false ;
+						  
+					   }
+				 });
+			}
+			
 			
 			
 			
@@ -397,13 +425,12 @@ public class GameView extends JFrame implements ActionListener{
 				   public void actionPerformed(ActionEvent event){
 					   GameView.setchosenlevelmulti("levelMulti5");
 				   }
-			 });
-			
-			//clic sur le bouton ok
+			 });		
+			//clic sur le bouton ok (le premier en multi)
 			this.ok.addActionListener(new ActionListener(){
 				   public void actionPerformed(ActionEvent event){
 					   //ModeSolo.startGame(playerimg,chosenlevel);
-					   System.out.println('a');
+					  
 					   gamemenumultipage2launch(nbplayer);
 					  /* p2.setVisible(false);
 					   p3.setVisible(false);
@@ -413,7 +440,6 @@ public class GameView extends JFrame implements ActionListener{
 					   lvl3multi.setVisible(false);
 					   lvl4multi.setVisible(false);
 					   lvl5multi.setVisible(false);*/
-					   
 					   bouton("multi1", 0, false);//cheat
 				   }
 			 });
@@ -558,32 +584,38 @@ public class GameView extends JFrame implements ActionListener{
 				   }
 			 });
 			
-			this.ok2.addActionListener(new ActionListener(){
-				   public void actionPerformed(ActionEvent event){
-					   
-					 /*  player1_1.setVisible(false);
-					   player2_1.setVisible(false);
-					   player3_1.setVisible(false);
-					   player4_1.setVisible(false);
-					   player1_2.setVisible(false);
-					   player2_2.setVisible(false);
-					   player3_2.setVisible(false);
-					   player4_2.setVisible(false);
-					   player1_3.setVisible(false);
-					   player2_3.setVisible(false);
-					   player3_3.setVisible(false);
-					   player4_3.setVisible(false);
-					   player1_4.setVisible(false);
-					   player2_4.setVisible(false);
-					   player3_4.setVisible(false);
-					   player4_4.setVisible(false);*/
-					   
-					   bouton("multi2", 4, false);//cheat
-					   
-					
-					   Gamelaunch("multi");
-				   }
-			 });
+			
+			if(premierTour2 == true){	//cette condition évite de créer plusieurs listener pour le même bouton
+				this.ok2.addActionListener(new ActionListener(){
+					   public void actionPerformed(ActionEvent event){
+						   
+						 /*  player1_1.setVisible(false);
+						   player2_1.setVisible(false);
+						   player3_1.setVisible(false);
+						   player4_1.setVisible(false);
+						   player1_2.setVisible(false);
+						   player2_2.setVisible(false);
+						   player3_2.setVisible(false);
+						   player4_2.setVisible(false);
+						   player1_3.setVisible(false);
+						   player2_3.setVisible(false);
+						   player3_3.setVisible(false);
+						   player4_3.setVisible(false);
+						   player1_4.setVisible(false);
+						   player2_4.setVisible(false);
+						   player3_4.setVisible(false);
+						   player4_4.setVisible(false);*/
+						   
+						   bouton("multi2", 4, false);//cheat
+						   
+						
+						   Gamelaunch("multi");
+						   
+						   premierTour2 = false ;
+					   }
+				 });
+			}
+			
 			
 			
 			
@@ -664,6 +696,9 @@ public class GameView extends JFrame implements ActionListener{
 	
 	
 	
+	
+	
+	//permet rendre visible/invisible les éléments de l'inteface du début
 	public void bouton(String page, int nbplayers, Boolean bool){
 		if(page== "menuprincipal"){
 		bmulti.setVisible(bool);
@@ -693,7 +728,6 @@ public class GameView extends JFrame implements ActionListener{
 			 player4_2.setVisible(bool);
 			}
 			if (nbplayers == 3){
-				//ok.setVisible(bool);
 			 player1_1.setVisible(bool);
 			 player2_1.setVisible(bool);
 			 player3_1.setVisible(bool);
@@ -708,7 +742,6 @@ public class GameView extends JFrame implements ActionListener{
 			 player4_3.setVisible(bool);
 			 }
 			if(nbplayers == 4){
-				//ok.setVisible(bool);
 			player1_1.setVisible(bool);
 			player2_1.setVisible(bool);
 			player3_1.setVisible(bool);
